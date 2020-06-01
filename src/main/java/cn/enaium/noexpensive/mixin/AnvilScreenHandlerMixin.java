@@ -1,26 +1,22 @@
 package cn.enaium.noexpensive.mixin;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.minecraft.container.AnvilContainer;
-import net.minecraft.container.Property;
+import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.CraftingResultInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.EnchantedBookItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.screen.*;
 import net.minecraft.text.LiteralText;
 import org.apache.commons.lang3.StringUtils;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -30,52 +26,46 @@ import java.util.Map;
  * -----------------------------------------------------------
  * Copyright © 2020 | Enaium | All rights reserved.
  */
-@Mixin(AnvilContainer.class)
-public abstract class AnvilScreenMixin {
-    @Shadow
-    @Final
-    private Inventory inventory;
+@Mixin(AnvilScreenHandler.class)
+public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
 
     @Shadow
     @Final
     private Property levelCost;
 
     @Shadow
-    @Final
-    private Inventory result;
-
-    @Shadow
     private int repairItemUsage;
 
-    @Shadow
-    @Final
-    private PlayerEntity player;
-
-    @Shadow
-    private String newItemName;
+    public AnvilScreenHandlerMixin(ScreenHandlerType<?> type, int syncId, PlayerInventory playerInventory, ScreenHandlerContext context) {
+        super(type, syncId, playerInventory, context);
+    }
 
     @Shadow
     public static int getNextCost(int cost) {
         return cost * 2 + 1;
     }
 
+    @Shadow
+    private String newItemName;
+
+
     /**
      * @author Enaium
      */
     @Overwrite
     public void updateResult() {
-        ItemStack itemStack = this.inventory.getInvStack(0);
+        ItemStack itemStack = this.input.getStack(0);
         this.levelCost.set(1);
         int i = 0;
         int j = 0;
         int k = 0;
         if (itemStack.isEmpty()) {
-            this.result.setInvStack(0, ItemStack.EMPTY);
+            this.output.setStack(0, ItemStack.EMPTY);
             this.levelCost.set(0);
         } else {
             ItemStack itemStack2 = itemStack.copy();
-            ItemStack itemStack3 = this.inventory.getInvStack(1);
-            Map<Enchantment, Integer> map = EnchantmentHelper.getEnchantments(itemStack2);
+            ItemStack itemStack3 = this.input.getStack(1);
+            Map<Enchantment, Integer> map = EnchantmentHelper.get(itemStack2);
             j = j + itemStack.getRepairCost() + (itemStack3.isEmpty() ? 0 : itemStack3.getRepairCost());
             this.repairItemUsage = 0;
             if (!itemStack3.isEmpty()) {
@@ -86,7 +76,7 @@ public abstract class AnvilScreenMixin {
                 if (itemStack2.isDamageable() && itemStack2.getItem().canRepair(itemStack, itemStack3)) {
                     o = Math.min(itemStack2.getDamage(), itemStack2.getMaxDamage() / 4);
                     if (o <= 0) {
-                        this.result.setInvStack(0, ItemStack.EMPTY);
+                        this.output.setStack(0, ItemStack.EMPTY);
                         this.levelCost.set(0);
                         return;
                     }
@@ -101,7 +91,7 @@ public abstract class AnvilScreenMixin {
                     this.repairItemUsage = p;
                 } else {
                     if (!bl && (itemStack2.getItem() != itemStack3.getItem() || !itemStack2.isDamageable())) {
-                        this.result.setInvStack(0, ItemStack.EMPTY);
+                        this.output.setStack(0, ItemStack.EMPTY);
                         this.levelCost.set(0);
                         return;
                     }
@@ -122,7 +112,7 @@ public abstract class AnvilScreenMixin {
                         }
                     }
 
-                    Map<Enchantment, Integer> map2 = EnchantmentHelper.getEnchantments(itemStack3);
+                    Map<Enchantment, Integer> map2 = EnchantmentHelper.get(itemStack3);
                     boolean bl2 = false;
                     boolean bl3 = false;
                     Iterator var24 = map2.keySet().iterator();
@@ -133,7 +123,7 @@ public abstract class AnvilScreenMixin {
                         do {
                             if (!var24.hasNext()) {
                                 if (bl3 && !bl2) {
-                                    this.result.setInvStack(0, ItemStack.EMPTY);
+                                    this.output.setStack(0, ItemStack.EMPTY);
                                     this.levelCost.set(0);
                                     return;
                                 }
@@ -155,7 +145,7 @@ public abstract class AnvilScreenMixin {
 
                         while (var17.hasNext()) {
                             Enchantment enchantment2 = (Enchantment) var17.next();
-                            if (enchantment2 != enchantment && !enchantment.isDifferent(enchantment2)) {
+                            if (enchantment2 != enchantment && !enchantment.canCombine(enchantment2)) {
                                 bl4 = false;
                                 ++i;
                             }
@@ -165,13 +155,13 @@ public abstract class AnvilScreenMixin {
                             bl3 = true;
                         } else {
                             bl2 = true;
-                            if (u > enchantment.getMaximumLevel()) {
-                                u = enchantment.getMaximumLevel();
+                            if (u > enchantment.getMaxLevel()) {
+                                u = enchantment.getMaxLevel();
                             }
 
                             map.put(enchantment, u);
                             int v = 0;
-                            switch (enchantment.getWeight()) {
+                            switch (enchantment.getRarity()) {
                                 case COMMON:
                                     v = 1;
                                     break;
@@ -220,7 +210,6 @@ public abstract class AnvilScreenMixin {
             }
 
             if (this.levelCost.get() >= 40 && !this.player.abilities.creativeMode) {
-                //NoExpensive
                 this.levelCost.set(39);
             }
 
@@ -238,7 +227,7 @@ public abstract class AnvilScreenMixin {
                 EnchantmentHelper.set(map, itemStack2);
             }
 
-            this.result.setInvStack(0, itemStack2);
+            this.output.setStack(0, itemStack2);
         }
     }
 }

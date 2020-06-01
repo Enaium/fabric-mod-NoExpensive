@@ -6,7 +6,7 @@
   "mixins": [
   ],
   "client": [
-    "AnvilScreenMixin"
+    "AnvilScreenHandlerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
