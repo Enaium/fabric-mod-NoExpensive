@@ -226,8 +226,8 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
                 itemStack2.setRepairCost(w);
                 EnchantmentHelper.set(map, itemStack2);
             }
-
             this.output.setStack(0, itemStack2);
+            this.sendContentUpdates();
         }
     }
 }
