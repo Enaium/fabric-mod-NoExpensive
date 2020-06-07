@@ -1,12 +1,10 @@
 package cn.enaium.noexpensive.mixin;
 
-import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.enchantment.InfinityEnchantment;
+import net.minecraft.enchantment.MendingEnchantment;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.CraftingResultInventory;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.item.EnchantedBookItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -145,7 +143,7 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
 
                         while (var17.hasNext()) {
                             Enchantment enchantment2 = (Enchantment) var17.next();
-                            if (enchantment2 != enchantment && !enchantment.canCombine(enchantment2)) {
+                            if (enchantment2 != enchantment && !canCombine(enchantment, enchantment2)) {
                                 bl4 = false;
                                 ++i;
                             }
@@ -229,5 +227,12 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
             this.output.setStack(0, itemStack2);
             this.sendContentUpdates();
         }
+    }
+
+    private boolean canCombine(Enchantment enchantment1, Enchantment enchantment2) {
+        if ((enchantment1 instanceof InfinityEnchantment && enchantment2 instanceof MendingEnchantment) || (enchantment2 instanceof InfinityEnchantment && enchantment1 instanceof MendingEnchantment)) {
+            return true;
+        }
+        return enchantment1.canCombine(enchantment2);
     }
 }
