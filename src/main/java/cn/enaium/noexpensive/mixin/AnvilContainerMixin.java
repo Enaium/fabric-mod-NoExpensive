@@ -1,14 +1,15 @@
 package cn.enaium.noexpensive.mixin;
 
+import net.minecraft.container.*;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.InfinityEnchantment;
 import net.minecraft.enchantment.MendingEnchantment;
-import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.EnchantedBookItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.screen.*;
 import net.minecraft.text.LiteralText;
 import org.apache.commons.lang3.StringUtils;
 import org.spongepowered.asm.mixin.Final;
@@ -24,46 +25,57 @@ import java.util.Map;
  * -----------------------------------------------------------
  * Copyright © 2020 | Enaium | All rights reserved.
  */
-@Mixin(AnvilScreenHandler.class)
-public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
+@Mixin(AnvilContainer.class)
+public abstract class AnvilContainerMixin extends Container {
+
+    @Shadow
+    @Final
+    private Inventory inventory;
 
     @Shadow
     @Final
     private Property levelCost;
 
     @Shadow
-    private int repairItemUsage;
-
-    public AnvilScreenHandlerMixin(ScreenHandlerType<?> type, int syncId, PlayerInventory playerInventory, ScreenHandlerContext context) {
-        super(type, syncId, playerInventory, context);
-    }
+    @Final
+    private Inventory result;
 
     @Shadow
-    public static int getNextCost(int cost) {
-        return cost * 2 + 1;
-    }
+    private int repairItemUsage;
 
     @Shadow
     private String newItemName;
 
+    @Shadow
+    @Final
+    private PlayerEntity player;
+
+    protected AnvilContainerMixin(ContainerType<?> type, int syncId) {
+        super(type, syncId);
+    }
+
+    @Shadow
+    public static int getNextCost(int cost) {
+        return 0;
+    }
 
     /**
      * @author Enaium
      */
     @Overwrite
     public void updateResult() {
-        ItemStack itemStack = this.input.getStack(0);
+        ItemStack itemStack = this.inventory.getInvStack(0);
         this.levelCost.set(1);
         int i = 0;
         int j = 0;
         int k = 0;
         if (itemStack.isEmpty()) {
-            this.output.setStack(0, ItemStack.EMPTY);
+            this.result.setInvStack(0, ItemStack.EMPTY);
             this.levelCost.set(0);
         } else {
             ItemStack itemStack2 = itemStack.copy();
-            ItemStack itemStack3 = this.input.getStack(1);
-            Map<Enchantment, Integer> map = EnchantmentHelper.get(itemStack2);
+            ItemStack itemStack3 = this.inventory.getInvStack(1);
+            Map<Enchantment, Integer> map = EnchantmentHelper.getEnchantments(itemStack2);
             j = j + itemStack.getRepairCost() + (itemStack3.isEmpty() ? 0 : itemStack3.getRepairCost());
             this.repairItemUsage = 0;
             if (!itemStack3.isEmpty()) {
@@ -74,7 +86,7 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
                 if (itemStack2.isDamageable() && itemStack2.getItem().canRepair(itemStack, itemStack3)) {
                     o = Math.min(itemStack2.getDamage(), itemStack2.getMaxDamage() / 4);
                     if (o <= 0) {
-                        this.output.setStack(0, ItemStack.EMPTY);
+                        this.result.setInvStack(0, ItemStack.EMPTY);
                         this.levelCost.set(0);
                         return;
                     }
@@ -89,7 +101,7 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
                     this.repairItemUsage = p;
                 } else {
                     if (!bl && (itemStack2.getItem() != itemStack3.getItem() || !itemStack2.isDamageable())) {
-                        this.output.setStack(0, ItemStack.EMPTY);
+                        this.result.setInvStack(0, ItemStack.EMPTY);
                         this.levelCost.set(0);
                         return;
                     }
@@ -110,7 +122,7 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
                         }
                     }
 
-                    Map<Enchantment, Integer> map2 = EnchantmentHelper.get(itemStack3);
+                    Map<Enchantment, Integer> map2 = EnchantmentHelper.getEnchantments(itemStack3);
                     boolean bl2 = false;
                     boolean bl3 = false;
                     Iterator var24 = map2.keySet().iterator();
@@ -121,7 +133,7 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
                         do {
                             if (!var24.hasNext()) {
                                 if (bl3 && !bl2) {
-                                    this.output.setStack(0, ItemStack.EMPTY);
+                                    this.result.setInvStack(0, ItemStack.EMPTY);
                                     this.levelCost.set(0);
                                     return;
                                 }
@@ -143,7 +155,7 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
 
                         while (var17.hasNext()) {
                             Enchantment enchantment2 = (Enchantment) var17.next();
-                            if (enchantment2 != enchantment && !canCombine(enchantment, enchantment2)) {
+                            if (enchantment2 != enchantment && !isDifferent(enchantment, enchantment2)) {
                                 bl4 = false;
                                 ++i;
                             }
@@ -153,13 +165,13 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
                             bl3 = true;
                         } else {
                             bl2 = true;
-                            if (u > enchantment.getMaxLevel()) {
-                                u = enchantment.getMaxLevel();
+                            if (u > enchantment.getMaximumLevel()) {
+                                u = enchantment.getMaximumLevel();
                             }
 
                             map.put(enchantment, u);
                             int v = 0;
-                            switch (enchantment.getRarity()) {
+                            switch (enchantment.getWeight()) {
                                 case COMMON:
                                     v = 1;
                                     break;
@@ -224,15 +236,16 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
                 itemStack2.setRepairCost(w);
                 EnchantmentHelper.set(map, itemStack2);
             }
-            this.output.setStack(0, itemStack2);
+
+            this.result.setInvStack(0, itemStack2);
             this.sendContentUpdates();
         }
     }
 
-    private boolean canCombine(Enchantment enchantment1, Enchantment enchantment2) {
+    private boolean isDifferent(Enchantment enchantment1, Enchantment enchantment2) {
         if ((enchantment1 instanceof InfinityEnchantment && enchantment2 instanceof MendingEnchantment) || (enchantment2 instanceof InfinityEnchantment && enchantment1 instanceof MendingEnchantment)) {
             return true;
         }
-        return enchantment1.canCombine(enchantment2);
+        return enchantment1.isDifferent(enchantment2);
     }
 }
