@@ -1,10 +1,7 @@
 package cn.enaium.noexpensive.mixin;
 
 import net.minecraft.container.*;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.InfinityEnchantment;
-import net.minecraft.enchantment.MendingEnchantment;
+import net.minecraft.enchantment.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.EnchantedBookItem;
@@ -244,6 +241,8 @@ public abstract class AnvilContainerMixin extends Container {
 
     private boolean isDifferent(Enchantment enchantment1, Enchantment enchantment2) {
         if ((enchantment1 instanceof InfinityEnchantment && enchantment2 instanceof MendingEnchantment) || (enchantment2 instanceof InfinityEnchantment && enchantment1 instanceof MendingEnchantment)) {
+            return true;
+        } else if ((enchantment1 instanceof MultishotEnchantment && enchantment2 instanceof PiercingEnchantment) || (enchantment2 instanceof MultishotEnchantment && enchantment1 instanceof PiercingEnchantment)) {
             return true;
         }
         return enchantment1.isDifferent(enchantment2);
