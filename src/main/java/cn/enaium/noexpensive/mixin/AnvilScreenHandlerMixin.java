@@ -1,9 +1,6 @@
 package cn.enaium.noexpensive.mixin;
 
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.InfinityEnchantment;
-import net.minecraft.enchantment.MendingEnchantment;
+import net.minecraft.enchantment.*;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.EnchantedBookItem;
 import net.minecraft.item.ItemStack;
@@ -115,7 +112,7 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
                     boolean bl3 = false;
                     Iterator var24 = map2.keySet().iterator();
 
-                    label160:
+                    label155:
                     while (true) {
                         Enchantment enchantment;
                         do {
@@ -125,13 +122,13 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
                                     this.levelCost.set(0);
                                     return;
                                 }
-                                break label160;
+                                break label155;
                             }
 
                             enchantment = (Enchantment) var24.next();
                         } while (enchantment == null);
 
-                        int t = map.containsKey(enchantment) ? (Integer) map.get(enchantment) : 0;
+                        int t = (Integer) map.getOrDefault(enchantment, 0);
                         int u = (Integer) map2.get(enchantment);
                         u = t == u ? u + 1 : Math.max(u, t);
                         boolean bl4 = enchantment.isAcceptableItem(itemStack);
@@ -208,7 +205,7 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
             }
 
             if (this.levelCost.get() >= 40 && !this.player.abilities.creativeMode) {
-                this.levelCost.set(39);
+                itemStack2 = ItemStack.EMPTY;
             }
 
             if (!itemStack2.isEmpty()) {
@@ -224,6 +221,7 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
                 itemStack2.setRepairCost(w);
                 EnchantmentHelper.set(map, itemStack2);
             }
+
             this.output.setStack(0, itemStack2);
             this.sendContentUpdates();
         }
@@ -231,6 +229,8 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
 
     private boolean canCombine(Enchantment enchantment1, Enchantment enchantment2) {
         if ((enchantment1 instanceof InfinityEnchantment && enchantment2 instanceof MendingEnchantment) || (enchantment2 instanceof InfinityEnchantment && enchantment1 instanceof MendingEnchantment)) {
+            return true;
+        } else if ((enchantment1 instanceof MultishotEnchantment && enchantment2 instanceof PiercingEnchantment) || (enchantment2 instanceof MultishotEnchantment && enchantment1 instanceof PiercingEnchantment)) {
             return true;
         }
         return enchantment1.canCombine(enchantment2);
