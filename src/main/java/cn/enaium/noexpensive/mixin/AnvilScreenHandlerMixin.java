@@ -43,7 +43,6 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
     @Shadow
     private String newItemName;
 
-
     /**
      * @author Enaium
      */
@@ -235,4 +234,5 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
         }
         return enchantment1.canCombine(enchantment2);
     }
+
 }
