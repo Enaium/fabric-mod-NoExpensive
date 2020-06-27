@@ -204,7 +204,7 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
             }
 
             if (this.levelCost.get() >= 40 && !this.player.abilities.creativeMode) {
-                itemStack2 = ItemStack.EMPTY;
+                this.levelCost.set(39);
             }
 
             if (!itemStack2.isEmpty()) {
