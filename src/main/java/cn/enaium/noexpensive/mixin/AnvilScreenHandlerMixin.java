@@ -131,7 +131,7 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
                         int u = (Integer) map2.get(enchantment);
                         u = t == u ? u + 1 : Math.max(u, t);
                         boolean bl4 = enchantment.isAcceptableItem(itemStack);
-                        if (this.player.abilities.creativeMode || itemStack.getItem() == Items.ENCHANTED_BOOK) {
+                        if (this.player.method_31549().creativeMode || itemStack.getItem() == Items.ENCHANTED_BOOK) {
                             bl4 = true;
                         }
 
@@ -203,7 +203,7 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
                 this.levelCost.set(39);
             }
 
-            if (this.levelCost.get() >= 40 && !this.player.abilities.creativeMode) {
+            if (this.levelCost.get() >= 40 && !this.player.method_31549().creativeMode) {
                 this.levelCost.set(39);
             }
 
