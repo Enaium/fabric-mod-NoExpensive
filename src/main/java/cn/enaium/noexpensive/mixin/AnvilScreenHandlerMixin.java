@@ -74,14 +74,12 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
                         this.levelCost.set(0);
                         return;
                     }
-
                     for (p = 0; o > 0 && p < itemStack3.getCount(); ++p) {
                         q = itemStack2.getDamage() - o;
                         itemStack2.setDamage(q);
                         ++i;
                         o = Math.min(itemStack2.getDamage(), itemStack2.getMaxDamage() / 4);
                     }
-
                     this.repairItemUsage = p;
                 } else {
                     if (!bl && (itemStack2.getItem() != itemStack3.getItem() || !itemStack2.isDamageable())) {
