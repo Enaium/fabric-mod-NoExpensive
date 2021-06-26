@@ -17,9 +17,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * Project: NoExpensive
- * -----------------------------------------------------------
- * Copyright © 2020 | Enaium | All rights reserved.
+ * @author Enaium
  */
 @Mixin(AnvilScreenHandler.class)
 public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
@@ -63,7 +61,7 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
             j = j + itemStack.getRepairCost() + (itemStack3.isEmpty() ? 0 : itemStack3.getRepairCost());
             this.repairItemUsage = 0;
             if (!itemStack3.isEmpty()) {
-                boolean bl = itemStack3.getItem() == Items.ENCHANTED_BOOK && !EnchantedBookItem.getEnchantmentTag(itemStack3).isEmpty();
+                boolean bl = itemStack3.getItem() == Items.ENCHANTED_BOOK && !EnchantedBookItem.getEnchantmentNbt(itemStack3).isEmpty();
                 int o;
                 int p;
                 int q;
