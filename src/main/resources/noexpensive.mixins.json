@@ -4,7 +4,8 @@
   "package": "cn.enaium.noexpensive.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "AnvilScreenHandlerMixin"
+    "AnvilScreenHandlerMixin",
+    "AnvilScreenMixin"
   ],
   "client": [
   ],
