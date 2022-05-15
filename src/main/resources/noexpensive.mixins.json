@@ -5,7 +5,8 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "AnvilContainerMixin",
-    "AnvilScreenMixin"
+    "AnvilScreenMixin",
+    "ProtectionEnchantmentMixin"
   ],
   "client": [
   ],
