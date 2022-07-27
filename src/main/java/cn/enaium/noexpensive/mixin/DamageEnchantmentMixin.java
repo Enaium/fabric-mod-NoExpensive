@@ -9,7 +9,9 @@ import org.spongepowered.asm.mixin.Overwrite;
 
 @Mixin(DamageEnchantment.class)
 public class DamageEnchantmentMixin extends Enchantment {
-    protected DamageEnchantmentMixin(Rarity weight, EnchantmentTarget type, EquipmentSlot[] slotTypes) {
+
+
+    protected DamageEnchantmentMixin(Weight weight, EnchantmentTarget type, EquipmentSlot[] slotTypes) {
         super(weight, type, slotTypes);
     }
 
@@ -18,7 +20,7 @@ public class DamageEnchantmentMixin extends Enchantment {
      * @reason no reason
      */
     @Overwrite
-    public boolean canAccept(Enchantment other) {
-        return super.canAccept(other);
+    public boolean differs(Enchantment other) {
+        return super.differs(other);
     }
 }
