@@ -6,6 +6,7 @@
   "mixins": [
     "AnvilScreenHandlerMixin",
     "AnvilScreenMixin",
+    "DamageEnchantmentMixin",
     "ProtectionEnchantmentMixin"
   ],
   "client": [
