@@ -19,6 +19,7 @@ public class ProtectionEnchantmentMixin extends Enchantment {
 
     /**
      * @author Enaium
+     * @reason no reason
      */
     @Overwrite
     public boolean canAccept(Enchantment other) {
