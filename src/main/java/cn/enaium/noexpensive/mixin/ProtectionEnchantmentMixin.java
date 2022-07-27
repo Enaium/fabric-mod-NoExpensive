@@ -18,6 +18,7 @@ public class ProtectionEnchantmentMixin extends Enchantment {
 
     /**
      * @author Enaium
+     * @reason no reason
      */
     @Overwrite
     public boolean differs(Enchantment other) {
