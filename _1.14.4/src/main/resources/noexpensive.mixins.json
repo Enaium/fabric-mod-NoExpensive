@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "cn.enaium.noexpensive.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "AnvilContainerMixin",
+    "AnvilScreenMixin",
+    "DamageEnchantmentMixin",
+    "ProtectionEnchantmentMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
