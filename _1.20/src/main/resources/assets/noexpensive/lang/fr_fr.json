@@ -1,0 +1,5 @@
+{
+  "command.maxLevel.success": "Niveau maximum défini à %s",
+  "command.compatibility.put.success": "Le niveau %s est maintenant compatible avec le niveau %s",
+  "command.compatibility.remove.success": "Le niveau %s n'est plus compatible avec le niveau %s"
+}

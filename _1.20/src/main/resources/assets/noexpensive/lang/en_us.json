@@ -1,0 +1,5 @@
+{
+  "command.maxLevel.success": "Set max level to %s",
+  "command.compatibility.put.success": "Put %s and %s as compatible",
+  "command.compatibility.remove.success": "Remove %s and %s as compatible"
+}
