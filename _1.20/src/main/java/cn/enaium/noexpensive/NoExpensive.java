@@ -23,20 +23,6 @@ public class NoExpensive implements ModInitializer {
 
     public static final LiteralArgumentBuilder<ServerCommandSource> ROOT = literal("noexpensive").requires(source -> source.hasPermissionLevel(4));
 
-    @Override
-    public void onInitialize() {
-        System.out.println("Hello NoExpensive world!");
-
-        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
-            MaxLevelCommand.register(dispatcher);
-            CompatibilityCommand.register(dispatcher, registryAccess);
-            ReloadCommand.register(dispatcher);
-        });
-
-        Config.load();
-        Runtime.getRuntime().addShutdownHook(new Thread(Config::save));
-    }
-
     public static boolean canCombine0(Enchantment enchantment1, Enchantment enchantment2) {
         final String enchantment1Name = Objects.requireNonNull(Registries.ENCHANTMENT.getId(enchantment1)).toString();
         final String enchantment2Name = Objects.requireNonNull(Registries.ENCHANTMENT.getId(enchantment2)).toString();
@@ -49,5 +35,19 @@ public class NoExpensive implements ModInitializer {
             return true;
         }
         return enchantment1.canCombine(enchantment2);
+    }
+
+    @Override
+    public void onInitialize() {
+        System.out.println("Hello NoExpensive world!");
+
+        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
+            MaxLevelCommand.register(dispatcher);
+            CompatibilityCommand.register(dispatcher, registryAccess);
+            ReloadCommand.register(dispatcher);
+        });
+
+        Config.load();
+        Runtime.getRuntime().addShutdownHook(new Thread(Config::save));
     }
 }

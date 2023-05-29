@@ -5,14 +5,10 @@ import cn.enaium.noexpensive.NoExpensive;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.registry.Registries;
 import net.minecraft.screen.*;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
-
-import java.util.Map;
-import java.util.Objects;
 
 /**
  * @author Enaium

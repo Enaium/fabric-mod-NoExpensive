@@ -21,6 +21,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -58,14 +59,20 @@ public class CompatibilityCommand {
 
                                                 if (action == Action.PUT) {
                                                     if (compatibility.containsKey(enchantment1Name)) {
-                                                        compatibility.get(enchantment1Name).add(enchantment2Name);
+                                                        if (!compatibility.get(enchantment1Name).contains(enchantment2Name)) {
+                                                            compatibility.get(enchantment1Name).add(enchantment2Name);
+                                                            context.getSource().sendFeedback(() -> Text.translatable("command.compatibility.put.success", enchantment1Text, enchantment2Text), false);
+                                                        }
                                                     } else {
-                                                        compatibility.put(enchantment1Name, Collections.singletonList(enchantment2Name));
+                                                        compatibility.put(enchantment1Name, new ArrayList<>(Collections.singletonList(enchantment2Name)));
+                                                        context.getSource().sendFeedback(() -> Text.translatable("command.compatibility.put.success", enchantment1Text, enchantment2Text), false);
                                                     }
-                                                    context.getSource().sendFeedback(() -> Text.translatable("command.compatibility.put.success", enchantment1Text, enchantment2Text), false);
                                                 } else if (action == Action.REMOVE) {
                                                     if (compatibility.containsKey(enchantment1Name)) {
                                                         compatibility.get(enchantment1Name).remove(enchantment2Name);
+                                                        if (compatibility.get(enchantment1Name).isEmpty()) {
+                                                            compatibility.remove(enchantment1Name);
+                                                        }
                                                         context.getSource().sendFeedback(() -> Text.translatable("command.compatibility.remove.success", enchantment1Text, enchantment2Text), false);
                                                     }
                                                 }
@@ -92,6 +99,9 @@ public class CompatibilityCommand {
                         final ItemStack valueItemStack = Items.ENCHANTED_BOOK.getDefaultStack();
                         valueItemStack.addEnchantment(Registries.ENCHANTMENT.get(new Identifier(s)), 1);
                         enchantment.append(Text.literal(s).styled(style -> style.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_ITEM, new HoverEvent.ItemStackContent(valueItemStack))).withColor(Formatting.AQUA)));
+                        if (!s.equals(enchantmentCompatibility.getValue().get(enchantmentCompatibility.getValue().size() - 1))) {
+                            enchantment.append(Text.literal(", ").styled(style -> style.withColor(Formatting.YELLOW)));
+                        }
                     }
                 }
 

@@ -8,6 +8,7 @@ import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,11 +23,6 @@ public class Config {
 
     public static Model getModel() {
         return model;
-    }
-
-    public static class Model {
-        public int maxLevel = 39;
-        public Map<String, List<String>> compatibility = new HashMap<>();
     }
 
     public static void load() {
@@ -47,5 +43,23 @@ public class Config {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static class Model {
+        public int maxLevel = 39;
+
+        public Map<String, List<String>> compatibility = new HashMap<>(
+                Map.of(
+                        "minecraft:mending", new ArrayList<>(List.of("minecraft:infinity")),
+                        "minecraft:multishot", new ArrayList<>(List.of("minecraft:piercing")),
+                        "minecraft:sharpness", new ArrayList<>(List.of("minecraft:smite", "minecraft:bane_of_arthropods")),
+                        "minecraft:smite", new ArrayList<>(List.of("minecraft:bane_of_arthropods", "minecraft:sharpness")),
+                        "minecraft:bane_of_arthropods", new ArrayList<>(List.of("minecraft:sharpness", "minecraft:smite")),
+                        "minecraft:protection", new ArrayList<>(List.of("minecraft:projectile_protection", "minecraft:blast_protection", "minecraft:fire_protection")),
+                        "minecraft:projectile_protection", new ArrayList<>(List.of("minecraft:blast_protection", "minecraft:fire_protection", "minecraft:protection")),
+                        "minecraft:blast_protection", new ArrayList<>(List.of("minecraft:fire_protection", "minecraft:protection", "minecraft:projectile_protection")),
+                        "minecraft:fire_protection", new ArrayList<>(List.of("minecraft:protection", "minecraft:projectile_protection", "minecraft:blast_protection"))
+                )
+        );
     }
 }
