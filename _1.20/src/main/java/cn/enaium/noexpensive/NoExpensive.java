@@ -2,6 +2,7 @@ package cn.enaium.noexpensive;
 
 import cn.enaium.noexpensive.command.CompatibilityCommand;
 import cn.enaium.noexpensive.command.MaxLevelCommand;
+import cn.enaium.noexpensive.command.ReloadCommand;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -29,6 +30,7 @@ public class NoExpensive implements ModInitializer {
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
             MaxLevelCommand.register(dispatcher);
             CompatibilityCommand.register(dispatcher, registryAccess);
+            ReloadCommand.register(dispatcher);
         });
 
         Config.load();
