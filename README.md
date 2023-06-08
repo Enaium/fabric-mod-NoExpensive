@@ -6,6 +6,7 @@ The anvil has no expensive restrictions and compatible to any enchantment.
 
 ## Commands
 
+- `/noexpensive maxLevel` Get the maximum level of the repair cost.
 - `/noexpensive maxLevel <level>` Set the maximum level of the repair cost. (default: 39) If the level is set to 0, the
   repair cost will be auto calculated.
 - `/noexpensive compatibility PUT <enchantment> <enchantment>` Put a compatibility between two enchantments.

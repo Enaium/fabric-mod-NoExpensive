@@ -1,5 +1,6 @@
 {
   "command.maxLevel.success": "设置最大等级为 %s",
+  "command.maxLevel.get": "最大等级为 %s",
   "command.compatibility.put.success": "添加 %s 和 %s 为兼容",
   "command.compatibility.remove.success": "移除 %s 和 %s 的兼容",
   "command.reload.success": "重载配置文件成功"

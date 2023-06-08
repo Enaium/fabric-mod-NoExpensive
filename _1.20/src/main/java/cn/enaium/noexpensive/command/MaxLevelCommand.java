@@ -15,7 +15,10 @@ import static cn.enaium.noexpensive.NoExpensive.ROOT;
  */
 public class MaxLevelCommand {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
-        dispatcher.register(ROOT.then(CommandManager.literal("maxLevel").then(CommandManager.argument("level", IntegerArgumentType.integer()).executes(context -> {
+        dispatcher.register(ROOT.then(CommandManager.literal("maxLevel").executes(context -> {
+            context.getSource().sendFeedback(() -> Text.translatable("command.maxLevel.get", Config.getModel().maxLevel), false);
+            return Command.SINGLE_SUCCESS;
+        }).then(CommandManager.argument("level", IntegerArgumentType.integer()).executes(context -> {
             Config.getModel().maxLevel = IntegerArgumentType.getInteger(context, "level");
             context.getSource().sendFeedback(() -> Text.translatable("command.maxLevel.success", IntegerArgumentType.getInteger(context, "level")), false);
             Config.save();
