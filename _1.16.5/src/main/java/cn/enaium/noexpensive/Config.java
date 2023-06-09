@@ -20,7 +20,7 @@ import java.util.Map;
  */
 public class Config {
 
-    private static final File configFile = new File(MinecraftClient.getInstance().runDirectory, "NoExpensive.json");
+    private static final File configFile = new File(System.getProperty("user.dir"), "NoExpensive.json");
     private static Model model = new Model();
 
     public static Model getModel() {
