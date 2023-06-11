@@ -15,10 +15,10 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class AnvilScreenMixin {
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/container/AnvilContainer;getLevelCost()I"), method = "drawForeground")
     private int drawForeground(AnvilContainer anvilContainer) {
-        if (Config.getModel().maxLevel > 0) {
-            return Math.min(anvilContainer.getLevelCost(), Config.getModel().maxLevel);
+        if (Config.getModel().maxLevel == 0) {
+            return anvilContainer.getLevelCost();
         }
-        return anvilContainer.getLevelCost();
+        return Config.getModel().maxLevel;
     }
 
     @Redirect(at = @At(value = "FIELD", target = "Lnet/minecraft/entity/player/PlayerAbilities;creativeMode:Z"), method = "drawForeground")

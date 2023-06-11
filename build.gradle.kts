@@ -29,7 +29,7 @@ sourceSets {
 
 allprojects {
     group = "cn.enaium"
-    version = "1.6.1"
+    version = "1.6.2"
 }
 
 subprojects {
@@ -54,5 +54,11 @@ subprojects {
 
     repositories {
         mavenCentral()
+    }
+
+    sourceSets.main {
+        resources {
+            srcDir(file(rootProject.projectDir).resolve("resources"))
+        }
     }
 }
