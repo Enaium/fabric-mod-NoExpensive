@@ -1,3 +1,4 @@
+import com.github.breadmoirai.githubreleaseplugin.GithubReleaseExtension
 import com.modrinth.minotaur.ModrinthExtension
 
 plugins {
@@ -16,10 +17,12 @@ buildscript {
 
     val loomVersion: String by project
     val minotaurVersion: String by project
+    val githubReleaseVersion: String by project
 
     dependencies {
         classpath("net.fabricmc:fabric-loom:${loomVersion}")
         classpath("com.modrinth.minotaur:Minotaur:${minotaurVersion}")
+        classpath("com.github.breadmoirai:github-release:${githubReleaseVersion}")
     }
 }
 
@@ -41,6 +44,7 @@ subprojects {
         plugin("java")
         plugin("fabric-loom")
         plugin("com.modrinth.minotaur")
+        plugin("com.github.breadmoirai.github-release")
     }
 
     val archivesBaseName: String by project
@@ -81,6 +85,20 @@ subprojects {
                 }
                 uploadFile.set(tasks.named("remapJar"))
                 token.set(it.toString())
+            }
+        }
+
+        properties["github.token"]?.let {
+            configure<GithubReleaseExtension> {
+                token(it.toString())
+                owner.set("Enaium-FabricMC")
+                repo.set("NoExpensive")
+                tagName.set(version.toString())
+                releaseName.set("$archivesBaseName-$version")
+                targetCommitish.set("master")
+                generateReleaseNotes.set(false)
+                body.set("$archivesBaseName-$version")
+                releaseAssets(listOf(tasks.named("remapJar")))
             }
         }
     }
