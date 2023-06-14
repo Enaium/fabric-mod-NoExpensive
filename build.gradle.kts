@@ -1,3 +1,5 @@
+import com.modrinth.minotaur.ModrinthExtension
+
 plugins {
     id("java")
 }
@@ -13,9 +15,11 @@ buildscript {
     }
 
     val loomVersion: String by project
+    val minotaurVersion: String by project
 
     dependencies {
         classpath("net.fabricmc:fabric-loom:${loomVersion}")
+        classpath("com.modrinth.minotaur:Minotaur:${minotaurVersion}")
     }
 }
 
@@ -36,6 +40,7 @@ subprojects {
     apply {
         plugin("java")
         plugin("fabric-loom")
+        plugin("com.modrinth.minotaur")
     }
 
     val archivesBaseName: String by project
@@ -59,6 +64,24 @@ subprojects {
     sourceSets.main {
         resources {
             srcDir(file(rootProject.projectDir).resolve("resources"))
+        }
+    }
+
+    afterEvaluate {
+        properties["modrinth.token"]?.let {
+            configure<ModrinthExtension> {
+                projectId.set("2nz0kJ1N")
+                versionNumber.set(version.toString())
+                versionName.set("$archivesBaseName-$version")
+                gameVersions.set(listOf(property("minecraftVersion").toString()))
+                versionType.set("release")
+                loaders.set(listOf("fabric"))
+                dependencies {
+                    required.project("fabric-api")
+                }
+                uploadFile.set(tasks.named("remapJar"))
+                token.set(it.toString())
+            }
         }
     }
 }
