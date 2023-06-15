@@ -36,7 +36,7 @@ sourceSets {
 
 allprojects {
     group = "cn.enaium"
-    version = "1.6.2"
+    version = "1.6.3"
 }
 
 subprojects {
@@ -52,6 +52,8 @@ subprojects {
     base {
         archivesName.set(archivesBaseName)
     }
+
+    version = "${property("minecraft.version")}-${version}"
 
     tasks.processResources {
         inputs.property("version", project.version)
