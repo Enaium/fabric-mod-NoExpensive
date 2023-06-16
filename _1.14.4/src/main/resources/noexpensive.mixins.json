@@ -6,7 +6,7 @@
   "mixins": [
     "AnvilContainerMixin",
     "AnvilContainerSlotMixin",
-    "AnvilScreenMixin"
+    "ContainerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

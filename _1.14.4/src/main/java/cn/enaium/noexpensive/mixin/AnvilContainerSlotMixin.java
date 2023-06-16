@@ -26,5 +26,4 @@ public class AnvilContainerSlotMixin {
         }
         return property.get();
     }
-
 }
