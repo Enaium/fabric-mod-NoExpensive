@@ -88,6 +88,14 @@ subprojects {
     }
 
     afterEvaluate {
+        configurations.runtimeClasspath.get().forEach {
+            if (it.name.startsWith("sponge-mixin")) {
+                tasks.withType<JavaExec> {
+                    jvmArgs("-javaagent:${it.absolutePath}")
+                }
+            }
+        }
+
         properties["modrinth.token"]?.let {
             configure<ModrinthExtension> {
                 projectId.set("2nz0kJ1N")
