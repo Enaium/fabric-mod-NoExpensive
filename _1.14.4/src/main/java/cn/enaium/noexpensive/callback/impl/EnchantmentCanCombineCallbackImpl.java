@@ -26,6 +26,6 @@ public class EnchantmentCanCombineCallbackImpl implements EnchantmentCanCombineC
         } else if (compatibility.containsKey(enchantment2Name) && compatibility.get(enchantment2Name).contains(enchantment1Name)) {
             return ActionResult.PASS;
         }
-        return enchantment1.isDifferent(enchantment2) ? ActionResult.SUCCESS : ActionResult.FAIL;
+        return enchantment1.isDifferent(enchantment2) ? ActionResult.PASS : ActionResult.FAIL;
     }
 }
