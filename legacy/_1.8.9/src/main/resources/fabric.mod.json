@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "noexpensive",
+  "version": "${version}",
+  "name": "NoExpensive",
+  "description": "The anvil has no expensive restrictions!",
+  "authors": [
+    "Enaium"
+  ],
+  "contact": {
+    "homepage": "https://github.com/Enaium-FabricMC/NoExpensive",
+    "sources": "https://github.com/Enaium-FabricMC/NoExpensive",
+    "issues": "https://github.com/Enaium-FabricMC/NoExpensive/issues"
+  },
+  "license": "MIT",
+  "icon": "assets/noexpensive/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "cn.enaium.noexpensive.NoExpensive"
+    ]
+  },
+  "mixins": [
+    "noexpensive.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.19",
+    "minecraft": "1.8.x",
+    "legacy-fabric-api": "*"
+  },
+  "suggests": {
+    "flamingo": "*"
+  }
+}
