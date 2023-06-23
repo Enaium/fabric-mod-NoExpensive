@@ -113,7 +113,7 @@ subprojects {
                 versionType.set("release")
                 loaders.set(listOf("fabric"))
                 dependencies {
-                    required.project("fabric-api")
+                    required.project(if (parent?.name == "legacy") "legacy-fabric-api" else "fabric-api")
                 }
                 uploadFile.set(tasks.named("remapJar"))
                 token.set(it.toString())
