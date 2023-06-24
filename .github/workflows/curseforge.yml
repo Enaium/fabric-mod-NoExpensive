@@ -20,10 +20,10 @@ jobs:
         with:
           arguments: build
           gradle-version: 8.1
-      - name: Upload BungeeCord assets to CurseForge
+      - name: Upload jar to CurseForge
         uses: Kir-Antipov/mc-publish@v3.1
         with:
-          name: 1.7.10 - BungeeCord
+          name: 1.7.10
           version: 1.7.10
           files-primary: legacy/_1.7.10/build/libs/NE-*.jar
           files-secondary: ""
@@ -34,10 +34,10 @@ jobs:
           java: 8
           curseforge-id: 387108
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-      - name: Upload BungeeCord assets to CurseForge
+      - name: Upload jar to CurseForge
         uses: Kir-Antipov/mc-publish@v3.1
         with:
-          name: 1.8.9 - BungeeCord
+          name: 1.8.9
           version: 1.8.9
           files-primary: legacy/_1.8.9/build/libs/NE-*.jar
           files-secondary: ""
@@ -48,10 +48,10 @@ jobs:
           java: 8
           curseforge-id: 387108
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-      - name: Upload BungeeCord assets to CurseForge
+      - name: Upload jar to CurseForge
         uses: Kir-Antipov/mc-publish@v3.1
         with:
-          name: 1.9.4 - BungeeCord
+          name: 1.9.4
           version: 1.9.4
           files-primary: legacy/_1.9.4/build/libs/NE-*.jar
           files-secondary: ""
@@ -61,10 +61,10 @@ jobs:
           dependencies: legacy-fabric-api
           java: 8
           curseforge-id: 387108
-      - name: Upload BungeeCord assets to CurseForge
+      - name: Upload jar to CurseForge
         uses: Kir-Antipov/mc-publish@v3.1
         with:
-          name: 1.10.2 - BungeeCord
+          name: 1.10.2
           version: 1.10.2
           files-primary: legacy/_1.10.2/build/libs/NE-*.jar
           files-secondary: ""
@@ -75,10 +75,10 @@ jobs:
           java: 8
           curseforge-id: 387108
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-      - name: Upload BungeeCord assets to CurseForge
+      - name: Upload jar to CurseForge
         uses: Kir-Antipov/mc-publish@v3.1
         with:
-          name: 1.11.2 - BungeeCord
+          name: 1.11.2
           version: 1.11.2
           files-primary: legacy/_1.11.2/build/libs/NE-*.jar
           files-secondary: ""
@@ -89,10 +89,10 @@ jobs:
           java: 8
           curseforge-id: 387108
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-      - name: Upload BungeeCord assets to CurseForge
+      - name: Upload jar to CurseForge
         uses: Kir-Antipov/mc-publish@v3.1
         with:
-          name: 1.12.2 - BungeeCord
+          name: 1.12.2
           version: 1.12.2
           files-primary: legacy/_1.12.2/build/libs/NE-*.jar
           files-secondary: ""
@@ -103,10 +103,10 @@ jobs:
           java: 8
           curseforge-id: 387108
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-      - name: Upload BungeeCord assets to CurseForge
+      - name: Upload jar to CurseForge
         uses: Kir-Antipov/mc-publish@v3.1
         with:
-          name: 1.14.4 - BungeeCord
+          name: 1.14.4
           version: 1.14.4
           files-primary: modern/_1.14.4/build/libs/NE-*.jar
           files-secondary: ""
@@ -117,10 +117,10 @@ jobs:
           java: 8
           curseforge-id: 387108
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-      - name: Upload BungeeCord assets to CurseForge
+      - name: Upload jar to CurseForge
         uses: Kir-Antipov/mc-publish@v3.1
         with:
-          name: 1.15.2 - BungeeCord
+          name: 1.15.2
           version: 1.15.2
           files-primary: modern/_1.15.2/build/libs/NE-*.jar
           files-secondary: ""
@@ -131,10 +131,10 @@ jobs:
           java: 8
           curseforge-id: 387108
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-      - name: Upload BungeeCord assets to CurseForge
+      - name: Upload jar to CurseForge
         uses: Kir-Antipov/mc-publish@v3.1
         with:
-          name: 1.16.5 - BungeeCord
+          name: 1.16.5
           version: 1.16.5
           files-primary: modern/_1.16.5/build/libs/NE-*.jar
           files-secondary: ""
@@ -145,10 +145,10 @@ jobs:
           java: 8
           curseforge-id: 387108
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-      - name: Upload BungeeCord assets to CurseForge
+      - name: Upload jar to CurseForge
         uses: Kir-Antipov/mc-publish@v3.1
         with:
-          name: 1.17.1 - BungeeCord
+          name: 1.17.1
           version: 1.17.1
           files-primary: modern/_1.17.1/build/libs/NE-*.jar
           files-secondary: ""
@@ -159,10 +159,10 @@ jobs:
           java: 17
           curseforge-id: 387108
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-      - name: Upload BungeeCord assets to CurseForge
+      - name: Upload jar to CurseForge
         uses: Kir-Antipov/mc-publish@v3.1
         with:
-          name: 1.18.2 - BungeeCord
+          name: 1.18.2
           version: 1.18.2
           files-primary: modern/_1.18.2/build/libs/NE-*.jar
           files-secondary: ""
@@ -173,10 +173,10 @@ jobs:
           java: 17
           curseforge-id: 387108
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-      - name: Upload BungeeCord assets to CurseForge
+      - name: Upload jar to CurseForge
         uses: Kir-Antipov/mc-publish@v3.1
         with:
-          name: 1.19.4 - BungeeCord
+          name: 1.19.4
           version: 1.19.4
           files-primary: modern/_1.19.4/build/libs/NE-*.jar
           files-secondary: ""
@@ -187,10 +187,10 @@ jobs:
           java: 17
           curseforge-id: 387108
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-      - name: Upload BungeeCord assets to CurseForge
+      - name: Upload jar to CurseForge
         uses: Kir-Antipov/mc-publish@v3.1
         with:
-          name: 1.20.1 - BungeeCord
+          name: 1.20.1
           version: 1.20.1
           files-primary: modern/_1.20.1/build/libs/NE-*.jar
           files-secondary: ""
