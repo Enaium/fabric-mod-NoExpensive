@@ -98,7 +98,10 @@ subprojects {
     afterEvaluate {
         configurations.runtimeClasspath.get().forEach {
             if (it.name.startsWith("sponge-mixin")) {
-                tasks.withType<JavaExec> {
+                tasks.named<JavaExec>("runClient") {
+                    jvmArgs("-javaagent:${it.absolutePath}")
+                }
+                tasks.named<JavaExec>("runServer") {
                     jvmArgs("-javaagent:${it.absolutePath}")
                 }
             }
