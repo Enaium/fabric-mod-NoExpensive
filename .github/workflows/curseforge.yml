@@ -1,4 +1,4 @@
-name: Build Jars
+name: Publish to CurseForge
 
 on:
   workflow_dispatch:
@@ -21,8 +21,8 @@ jobs:
       - name: Upload jar to CurseForge
         uses: Kir-Antipov/mc-publish@v3.1
         with:
-          name: 1.7.10
-          version: 1.7.10
+          name: ""
+          version: ""
           files-primary: legacy/_1.7.10/build/libs/NE-*.jar
           files-secondary: ""
           loaders: fabric
@@ -35,8 +35,8 @@ jobs:
       - name: Upload jar to CurseForge
         uses: Kir-Antipov/mc-publish@v3.1
         with:
-          name: 1.8.9
-          version: 1.8.9
+          name: ""
+          version: ""
           files-primary: legacy/_1.8.9/build/libs/NE-*.jar
           files-secondary: ""
           loaders: fabric
@@ -49,8 +49,8 @@ jobs:
       - name: Upload jar to CurseForge
         uses: Kir-Antipov/mc-publish@v3.1
         with:
-          name: 1.9.4
-          version: 1.9.4
+          name: ""
+          version: ""
           files-primary: legacy/_1.9.4/build/libs/NE-*.jar
           files-secondary: ""
           loaders: fabric
@@ -59,11 +59,12 @@ jobs:
           dependencies: legacy-fabric-api
           java: 8
           curseforge-id: 387108
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
       - name: Upload jar to CurseForge
         uses: Kir-Antipov/mc-publish@v3.1
         with:
-          name: 1.10.2
-          version: 1.10.2
+          name: ""
+          version: ""
           files-primary: legacy/_1.10.2/build/libs/NE-*.jar
           files-secondary: ""
           loaders: fabric
@@ -76,8 +77,8 @@ jobs:
       - name: Upload jar to CurseForge
         uses: Kir-Antipov/mc-publish@v3.1
         with:
-          name: 1.11.2
-          version: 1.11.2
+          name: ""
+          version: ""
           files-primary: legacy/_1.11.2/build/libs/NE-*.jar
           files-secondary: ""
           loaders: fabric
@@ -90,8 +91,8 @@ jobs:
       - name: Upload jar to CurseForge
         uses: Kir-Antipov/mc-publish@v3.1
         with:
-          name: 1.12.2
-          version: 1.12.2
+          name: ""
+          version: ""
           files-primary: legacy/_1.12.2/build/libs/NE-*.jar
           files-secondary: ""
           loaders: fabric
@@ -104,8 +105,8 @@ jobs:
       - name: Upload jar to CurseForge
         uses: Kir-Antipov/mc-publish@v3.1
         with:
-          name: 1.14.4
-          version: 1.14.4
+          name: ""
+          version: ""
           files-primary: modern/_1.14.4/build/libs/NE-*.jar
           files-secondary: ""
           loaders: fabric
@@ -118,8 +119,8 @@ jobs:
       - name: Upload jar to CurseForge
         uses: Kir-Antipov/mc-publish@v3.1
         with:
-          name: 1.15.2
-          version: 1.15.2
+          name: ""
+          version: ""
           files-primary: modern/_1.15.2/build/libs/NE-*.jar
           files-secondary: ""
           loaders: fabric
@@ -132,8 +133,8 @@ jobs:
       - name: Upload jar to CurseForge
         uses: Kir-Antipov/mc-publish@v3.1
         with:
-          name: 1.16.5
-          version: 1.16.5
+          name: ""
+          version: ""
           files-primary: modern/_1.16.5/build/libs/NE-*.jar
           files-secondary: ""
           loaders: fabric
@@ -146,8 +147,8 @@ jobs:
       - name: Upload jar to CurseForge
         uses: Kir-Antipov/mc-publish@v3.1
         with:
-          name: 1.17.1
-          version: 1.17.1
+          name: ""
+          version: ""
           files-primary: modern/_1.17.1/build/libs/NE-*.jar
           files-secondary: ""
           loaders: fabric
@@ -160,8 +161,8 @@ jobs:
       - name: Upload jar to CurseForge
         uses: Kir-Antipov/mc-publish@v3.1
         with:
-          name: 1.18.2
-          version: 1.18.2
+          name: ""
+          version: ""
           files-primary: modern/_1.18.2/build/libs/NE-*.jar
           files-secondary: ""
           loaders: fabric
@@ -174,8 +175,8 @@ jobs:
       - name: Upload jar to CurseForge
         uses: Kir-Antipov/mc-publish@v3.1
         with:
-          name: 1.19.4
-          version: 1.19.4
+          name: ""
+          version: ""
           files-primary: modern/_1.19.4/build/libs/NE-*.jar
           files-secondary: ""
           loaders: fabric
@@ -188,8 +189,8 @@ jobs:
       - name: Upload jar to CurseForge
         uses: Kir-Antipov/mc-publish@v3.1
         with:
-          name: 1.20.1
-          version: 1.20.1
+          name: ""
+          version: ""
           files-primary: modern/_1.20.1/build/libs/NE-*.jar
           files-secondary: ""
           loaders: fabric
