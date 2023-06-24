@@ -1,0 +1,203 @@
+name: Build Jars
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: "17"
+          distribution: "liberica"
+      - name: Build with Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: build
+          gradle-version: 8.1
+      - name: Upload BungeeCord assets to CurseForge
+        uses: Kir-Antipov/mc-publish@v3.1
+        with:
+          name: 1.7.10 - BungeeCord
+          version: 1.7.10
+          files-primary: legacy/_1.7.10/build/libs/NE-*.jar
+          files-secondary: ""
+          loaders: fabric
+          game-versions: |
+            1.7.10
+          dependencies: legacy-fabric-api
+          java: 8
+          curseforge-id: 387108
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+      - name: Upload BungeeCord assets to CurseForge
+        uses: Kir-Antipov/mc-publish@v3.1
+        with:
+          name: 1.8.9 - BungeeCord
+          version: 1.8.9
+          files-primary: legacy/_1.8.9/build/libs/NE-*.jar
+          files-secondary: ""
+          loaders: fabric
+          game-versions: |
+            1.8.9
+          dependencies: legacy-fabric-api
+          java: 8
+          curseforge-id: 387108
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+      - name: Upload BungeeCord assets to CurseForge
+        uses: Kir-Antipov/mc-publish@v3.1
+        with:
+          name: 1.9.4 - BungeeCord
+          version: 1.9.4
+          files-primary: legacy/_1.9.4/build/libs/NE-*.jar
+          files-secondary: ""
+          loaders: fabric
+          game-versions: |
+            1.9.4
+          dependencies: legacy-fabric-api
+          java: 8
+          curseforge-id: 387108
+      - name: Upload BungeeCord assets to CurseForge
+        uses: Kir-Antipov/mc-publish@v3.1
+        with:
+          name: 1.10.2 - BungeeCord
+          version: 1.10.2
+          files-primary: legacy/_1.10.2/build/libs/NE-*.jar
+          files-secondary: ""
+          loaders: fabric
+          game-versions: |
+            1.10.2
+          dependencies: legacy-fabric-api
+          java: 8
+          curseforge-id: 387108
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+      - name: Upload BungeeCord assets to CurseForge
+        uses: Kir-Antipov/mc-publish@v3.1
+        with:
+          name: 1.11.2 - BungeeCord
+          version: 1.11.2
+          files-primary: legacy/_1.11.2/build/libs/NE-*.jar
+          files-secondary: ""
+          loaders: fabric
+          game-versions: |
+            1.11.2
+          dependencies: legacy-fabric-api
+          java: 8
+          curseforge-id: 387108
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+      - name: Upload BungeeCord assets to CurseForge
+        uses: Kir-Antipov/mc-publish@v3.1
+        with:
+          name: 1.12.2 - BungeeCord
+          version: 1.12.2
+          files-primary: legacy/_1.12.2/build/libs/NE-*.jar
+          files-secondary: ""
+          loaders: fabric
+          game-versions: |
+            1.12.2
+          dependencies: legacy-fabric-api
+          java: 8
+          curseforge-id: 387108
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+      - name: Upload BungeeCord assets to CurseForge
+        uses: Kir-Antipov/mc-publish@v3.1
+        with:
+          name: 1.14.4 - BungeeCord
+          version: 1.14.4
+          files-primary: modern/_1.14.4/build/libs/NE-*.jar
+          files-secondary: ""
+          loaders: fabric
+          game-versions: |
+            1.14.4
+          dependencies: fabric-api
+          java: 8
+          curseforge-id: 387108
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+      - name: Upload BungeeCord assets to CurseForge
+        uses: Kir-Antipov/mc-publish@v3.1
+        with:
+          name: 1.15.2 - BungeeCord
+          version: 1.15.2
+          files-primary: modern/_1.15.2/build/libs/NE-*.jar
+          files-secondary: ""
+          loaders: fabric
+          game-versions: |
+            1.15.2
+          dependencies: fabric-api
+          java: 8
+          curseforge-id: 387108
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+      - name: Upload BungeeCord assets to CurseForge
+        uses: Kir-Antipov/mc-publish@v3.1
+        with:
+          name: 1.16.5 - BungeeCord
+          version: 1.16.5
+          files-primary: modern/_1.16.5/build/libs/NE-*.jar
+          files-secondary: ""
+          loaders: fabric
+          game-versions: |
+            1.16.5
+          dependencies: fabric-api
+          java: 8
+          curseforge-id: 387108
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+      - name: Upload BungeeCord assets to CurseForge
+        uses: Kir-Antipov/mc-publish@v3.1
+        with:
+          name: 1.17.1 - BungeeCord
+          version: 1.17.1
+          files-primary: modern/_1.17.1/build/libs/NE-*.jar
+          files-secondary: ""
+          loaders: fabric
+          game-versions: |
+            1.17.1
+          dependencies: fabric-api
+          java: 17
+          curseforge-id: 387108
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+      - name: Upload BungeeCord assets to CurseForge
+        uses: Kir-Antipov/mc-publish@v3.1
+        with:
+          name: 1.18.2 - BungeeCord
+          version: 1.18.2
+          files-primary: modern/_1.18.2/build/libs/NE-*.jar
+          files-secondary: ""
+          loaders: fabric
+          game-versions: |
+            1.18.2
+          dependencies: fabric-api
+          java: 17
+          curseforge-id: 387108
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+      - name: Upload BungeeCord assets to CurseForge
+        uses: Kir-Antipov/mc-publish@v3.1
+        with:
+          name: 1.19.4 - BungeeCord
+          version: 1.19.4
+          files-primary: modern/_1.19.4/build/libs/NE-*.jar
+          files-secondary: ""
+          loaders: fabric
+          game-versions: |
+            1.19.4
+          dependencies: fabric-api
+          java: 17
+          curseforge-id: 387108
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+      - name: Upload BungeeCord assets to CurseForge
+        uses: Kir-Antipov/mc-publish@v3.1
+        with:
+          name: 1.20.1 - BungeeCord
+          version: 1.20.1
+          files-primary: modern/_1.20.1/build/libs/NE-*.jar
+          files-secondary: ""
+          loaders: fabric
+          game-versions: |
+            1.20.1
+          dependencies: fabric-api
+          java: 17
+          curseforge-id: 387108
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
