@@ -59,4 +59,10 @@ public abstract class AnvilScreenHandlerMixin extends ScreenHandler {
     private boolean isDifferent(Enchantment enchantment, Enchantment other) {
         return EnchantmentCanCombineCallback.EVENT.invoker().interact(enchantment, other) == ActionResult.PASS;
     }
+
+    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/enchantment/Enchantment;getMaximumLevel()I"), method = "updateResult")
+    public int getMaxLevel(Enchantment instance) {
+        //though it's the type of the max level is short, but it will be cast to byte when it's used
+        return 255;
+    }
 }
