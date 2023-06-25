@@ -74,7 +74,7 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
 
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/enchantment/Enchantment;canCombine(Lnet/minecraft/enchantment/Enchantment;)Z"), method = "updateResult")
     private boolean canCombine(Enchantment enchantment, Enchantment other) {
-        return true;
+        return EnchantmentCanCombineCallback.EVENT.invoker().interact(enchantment, other) == ActionResult.PASS;
     }
 
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/enchantment/Enchantment;getMaxLevel()I"), method = "updateResult")
