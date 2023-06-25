@@ -15,16 +15,16 @@ public class AnvilScreenHandlerSlotMixin {
     @Redirect(at = @At(value = "FIELD", target = "Lnet/minecraft/screen/AnvilScreenHandler;repairCost:I", opcode = Opcodes.GETFIELD), method = "canTakeItems")
     private int canTakeItems(AnvilScreenHandler instance) {
         if (Config.getModel().maxLevel > 0) {
-            return Math.min(instance.repairCost, Config.getModel().maxLevel);
+            return Math.min(Math.abs(instance.repairCost), Config.getModel().maxLevel);
         }
-        return instance.repairCost;
+        return Math.abs(instance.repairCost);
     }
 
     @Redirect(at = @At(value = "FIELD", target = "Lnet/minecraft/screen/AnvilScreenHandler;repairCost:I", opcode = Opcodes.GETFIELD), method = "onTakeItem")
     private int onTakeItems(AnvilScreenHandler instance) {
         if (Config.getModel().maxLevel > 0) {
-            return Math.min(instance.repairCost, Config.getModel().maxLevel);
+            return Math.min(Math.abs(instance.repairCost), Config.getModel().maxLevel);
         }
-        return instance.repairCost;
+        return Math.abs(instance.repairCost);
     }
 }
