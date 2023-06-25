@@ -137,6 +137,7 @@ subprojects {
                     required.project(if (parent?.name == "legacy") "legacy-fabric-api" else "fabric-api")
                 }
                 uploadFile.set(tasks.named("remapJar"))
+                changelog.set(rootProject.file("changelog.md").readText(Charsets.UTF_8))
                 token.set(it.toString())
             }
         }
@@ -150,7 +151,7 @@ subprojects {
                 releaseName.set("$archivesBaseName-$version")
                 targetCommitish.set("master")
                 generateReleaseNotes.set(false)
-                body.set("$archivesBaseName-$version")
+                body.set(rootProject.file("changelog.md").readText(Charsets.UTF_8))
                 releaseAssets(listOf(tasks.named("remapJar")))
             }
         }
