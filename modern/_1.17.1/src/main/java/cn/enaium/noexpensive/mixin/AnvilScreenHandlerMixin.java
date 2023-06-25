@@ -32,25 +32,25 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/screen/Property;get()I"), method = "canTakeOutput")
     private int canTakeOutput(Property property) {
         if (Config.getModel().maxLevel > 0) {
-            return Math.min(property.get(), Config.getModel().maxLevel);
+            return Math.min(Math.abs(property.get()), Config.getModel().maxLevel);
         }
-        return property.get();
+        return Math.abs(property.get());
     }
 
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/screen/Property;get()I"), method = "onTakeOutput")
     private int onTakeOutput(Property property) {
         if (Config.getModel().maxLevel > 0) {
-            return Math.min(property.get(), Config.getModel().maxLevel);
+            return Math.min(Math.abs(property.get()), Config.getModel().maxLevel);
         }
-        return property.get();
+        return Math.abs(property.get());
     }
 
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/screen/Property;get()I"), method = "updateResult")
     private int get(Property property) {
         if (Config.getModel().maxLevel > 0) {
-            return Math.min(property.get(), Config.getModel().maxLevel);
+            return Math.min(Math.abs(property.get()), Config.getModel().maxLevel);
         }
-        return property.get();
+        return Math.abs(property.get());
     }
 
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/inventory/CraftingResultInventory;setStack(ILnet/minecraft/item/ItemStack;)V", shift = At.Shift.AFTER, ordinal = 4), method = "updateResult")
@@ -67,9 +67,9 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/screen/Property;get()I"), method = "getLevelCost")
     private int getLevelCost(Property property) {
         if (Config.getModel().maxLevel > 0) {
-            return Math.min(property.get(), Config.getModel().maxLevel);
+            return Math.min(Math.abs(property.get()), Config.getModel().maxLevel);
         }
-        return property.get();
+        return Math.abs(property.get());
     }
 
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/enchantment/Enchantment;canCombine(Lnet/minecraft/enchantment/Enchantment;)Z"), method = "updateResult")

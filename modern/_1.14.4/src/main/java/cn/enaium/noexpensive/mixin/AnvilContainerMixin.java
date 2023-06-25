@@ -45,9 +45,9 @@ public abstract class AnvilContainerMixin extends Container {
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/container/Property;get()I"), method = "updateResult")
     private int get(Property property) {
         if (Config.getModel().maxLevel > 0) {
-            return Math.min(property.get(), Config.getModel().maxLevel);
+            return Math.min(Math.abs(property.get()), Config.getModel().maxLevel);
         }
-        return property.get();
+        return Math.abs(property.get());
     }
 
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/inventory/Inventory;setInvStack(ILnet/minecraft/item/ItemStack;)V", shift = At.Shift.AFTER, ordinal = 4), method = "updateResult")
@@ -64,9 +64,9 @@ public abstract class AnvilContainerMixin extends Container {
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/container/Property;get()I"), method = "getLevelCost")
     private int getLevelCost(Property property) {
         if (Config.getModel().maxLevel > 0) {
-            return Math.min(property.get(), Config.getModel().maxLevel);
+            return Math.min(Math.abs(property.get()), Config.getModel().maxLevel);
         }
-        return property.get();
+        return Math.abs(property.get());
     }
 
 
