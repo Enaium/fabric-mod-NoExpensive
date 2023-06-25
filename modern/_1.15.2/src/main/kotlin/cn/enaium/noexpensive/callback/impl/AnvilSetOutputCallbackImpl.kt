@@ -1,10 +1,9 @@
-package callback.impl
+package cn.enaium.noexpensive.callback.impl
 
-import callback.AnvilSetOutputCallback
+import cn.enaium.noexpensive.callback.AnvilSetOutputCallback
 import net.minecraft.item.ItemStack
-import net.minecraft.nbt.NbtElement
-import net.minecraft.nbt.NbtList
-import net.minecraft.nbt.NbtString
+import net.minecraft.nbt.ListTag
+import net.minecraft.nbt.StringTag
 import net.minecraft.text.Style
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
@@ -16,14 +15,14 @@ import net.minecraft.util.Formatting
 class AnvilSetOutputCallbackImpl : AnvilSetOutputCallback {
     override fun interact(output: ItemStack, levelCost: Int, canTake: Boolean) {
         if (output != ItemStack.EMPTY) {
-            if (output.nbt != null) {
-                val nbtCompound = output.getOrCreateSubNbt(ItemStack.DISPLAY_KEY)
-                nbtCompound.put(ItemStack.LORE_KEY, NbtList())
-                nbtCompound.getList(ItemStack.LORE_KEY, NbtElement.LIST_TYPE.toInt()).add(
-                    NbtString.of(
+            if (output.tag != null) {
+                val compoundTag = output.getOrCreateSubTag("display")
+                compoundTag.put("Lore", ListTag())
+                compoundTag.getList("Lore", 9).add(
+                    StringTag.of(
                         Text.Serializer.toJson(
                             TranslatableText("container.repair.cost", levelCost).styled { style: Style ->
-                                style.withBold(true).withColor(if (canTake) Formatting.GREEN else Formatting.RED)
+                                style.setBold(true).setColor(if (canTake) Formatting.GREEN else Formatting.RED)
                             })
                     )
                 )

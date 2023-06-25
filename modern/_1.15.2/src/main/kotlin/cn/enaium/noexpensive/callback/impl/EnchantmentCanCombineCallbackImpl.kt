@@ -1,7 +1,7 @@
-package callback.impl
+package cn.enaium.noexpensive.callback.impl
 
 import cn.enaium.noexpensive.Config
-import callback.EnchantmentCanCombineCallback
+import cn.enaium.noexpensive.callback.EnchantmentCanCombineCallback
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.util.ActionResult
 import net.minecraft.util.registry.Registry
@@ -23,6 +23,6 @@ class EnchantmentCanCombineCallbackImpl : EnchantmentCanCombineCallback {
         ) {
             return ActionResult.PASS
         }
-        return if (enchantment1.canCombine(enchantment2)) ActionResult.PASS else ActionResult.FAIL
+        return if (enchantment1.isDifferent(enchantment2)) ActionResult.PASS else ActionResult.FAIL
     }
 }

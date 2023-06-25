@@ -1,4 +1,4 @@
-package command
+package cn.enaium.noexpensive.command
 
 import cn.enaium.noexpensive.Config
 import cn.enaium.noexpensive.ROOT

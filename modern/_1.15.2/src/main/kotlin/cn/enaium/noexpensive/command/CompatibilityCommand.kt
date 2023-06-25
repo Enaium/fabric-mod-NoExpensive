@@ -1,4 +1,4 @@
-package command
+package cn.enaium.noexpensive.command
 
 import cn.enaium.noexpensive.Config
 import cn.enaium.noexpensive.ROOT
@@ -116,12 +116,12 @@ fun compatibilityCommand(dispatcher: CommandDispatcher<ServerCommandSource>) {
                                 HoverEvent(
                                     HoverEvent.Action.SHOW_TEXT,
                                     TranslatableText(
-                                        Registry.ENCHANTMENT[Identifier(key)]!!.translationKey
+                                        Registry.ENCHANTMENT[Identifier(key)]?.translationKey ?: return@styled
                                     )
                                 )
                             ).setColor(Formatting.AQUA)
                         }
-                        if (!value.isEmpty()) {
+                        if (value.isNotEmpty()) {
                             enchantment.append(LiteralText(" -> ").styled { style -> style.setColor(Formatting.YELLOW) })
                             for (s in value) {
                                 enchantment.append(LiteralText(s).styled { style ->
@@ -129,7 +129,7 @@ fun compatibilityCommand(dispatcher: CommandDispatcher<ServerCommandSource>) {
                                         HoverEvent(
                                             HoverEvent.Action.SHOW_TEXT,
                                             TranslatableText(
-                                                Registry.ENCHANTMENT[Identifier(key)]!!.translationKey
+                                                Registry.ENCHANTMENT[Identifier(key)]?.translationKey ?: return@styled
                                             )
                                         )
                                     ).setColor(Formatting.AQUA)

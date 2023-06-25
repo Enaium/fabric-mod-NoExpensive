@@ -1,4 +1,4 @@
-package callback
+package cn.enaium.noexpensive.callback
 
 import net.fabricmc.fabric.api.event.Event
 import net.fabricmc.fabric.api.event.EventFactory
