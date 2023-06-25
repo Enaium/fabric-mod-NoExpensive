@@ -12,7 +12,7 @@ import net.legacyfabric.fabric.api.registry.CommandRegistry
 /**
  * @author Enaium
  */
-fun main() {
+fun initializer() {
     println("Hello NoExpensive world!")
     CommandRegistry.INSTANCE.register(NoExpensiveCommand())
     EnchantmentCanCombineCallback.EVENT.register(EnchantmentCanCombineCallbackImpl())

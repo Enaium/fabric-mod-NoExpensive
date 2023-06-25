@@ -17,7 +17,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "cn.enaium.noexpensive.NoExpensiveKt::main"
+      "cn.enaium.noexpensive.NoExpensiveKt::initializer"
     ]
   },
   "mixins": [

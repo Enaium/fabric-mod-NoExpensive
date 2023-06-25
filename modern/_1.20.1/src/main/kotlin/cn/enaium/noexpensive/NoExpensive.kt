@@ -19,7 +19,7 @@ import net.minecraft.server.command.ServerCommandSource
 /**
  * @author Enaium
  */
-fun main() {
+fun initializer() {
     println("Hello NoExpensive world!")
     CommandRegistrationCallback.EVENT.register(CommandRegistrationCallback { dispatcher: CommandDispatcher<ServerCommandSource>, registryAccess: CommandRegistryAccess, environment: CommandManager.RegistrationEnvironment ->
         maxLevelCommand(dispatcher)
