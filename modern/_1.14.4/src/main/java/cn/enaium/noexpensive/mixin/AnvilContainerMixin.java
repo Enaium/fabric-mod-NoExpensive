@@ -44,8 +44,8 @@ public abstract class AnvilContainerMixin extends Container {
 
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/container/Property;get()I"), method = "updateResult")
     private int get(Property property) {
-        if (Config.getModel().maxLevel > 0) {
-            return Math.min(Math.abs(property.get()), Config.getModel().maxLevel);
+        if (Config.INSTANCE.getModel().getMaxLevel() > 0) {
+            return Math.min(Math.abs(property.get()), Config.INSTANCE.getModel().getMaxLevel());
         }
         return Math.abs(property.get());
     }
@@ -53,7 +53,7 @@ public abstract class AnvilContainerMixin extends Container {
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/inventory/Inventory;setInvStack(ILnet/minecraft/item/ItemStack;)V", shift = At.Shift.AFTER, ordinal = 4), method = "updateResult")
     public void setStack(CallbackInfo ci) {
         ItemStack o = result.getInvStack(0);
-        AnvilSetOutputCallback.EVENT.invoker().interact(o, getLevelCost(), slots.get(2).canTakeItems(player));
+        AnvilSetOutputCallback.Companion.getEVENT().invoker().interact(o, getLevelCost(), slots.get(2).canTakeItems(player));
     }
 
     @Redirect(at = @At(value = "FIELD", target = "Lnet/minecraft/entity/player/PlayerAbilities;creativeMode:Z", ordinal = 1), method = "updateResult")
@@ -63,8 +63,8 @@ public abstract class AnvilContainerMixin extends Container {
 
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/container/Property;get()I"), method = "getLevelCost")
     private int getLevelCost(Property property) {
-        if (Config.getModel().maxLevel > 0) {
-            return Math.min(Math.abs(property.get()), Config.getModel().maxLevel);
+        if (Config.INSTANCE.getModel().getMaxLevel() > 0) {
+            return Math.min(Math.abs(property.get()), Config.INSTANCE.getModel().getMaxLevel());
         }
         return Math.abs(property.get());
     }
@@ -72,7 +72,7 @@ public abstract class AnvilContainerMixin extends Container {
 
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/enchantment/Enchantment;isDifferent(Lnet/minecraft/enchantment/Enchantment;)Z"), method = "updateResult")
     private boolean isDifferent(Enchantment enchantment, Enchantment other) {
-        return EnchantmentCanCombineCallback.EVENT.invoker().interact(enchantment, other) == ActionResult.PASS;
+        return EnchantmentCanCombineCallback.Companion.getEVENT().invoker().interact(enchantment, other) == ActionResult.PASS;
     }
 
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/enchantment/Enchantment;getMaximumLevel()I"), method = "updateResult")
