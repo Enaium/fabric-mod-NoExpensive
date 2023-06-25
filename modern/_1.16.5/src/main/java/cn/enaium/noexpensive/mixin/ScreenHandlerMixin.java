@@ -27,9 +27,9 @@ public abstract class ScreenHandlerMixin {
 
     @SuppressWarnings({"ConstantValue", "EqualsBetweenInconvertibleTypes"})
     @Inject(at = @At("HEAD"), method = "onSlotClick")
-    public void onSlotClick(int i, int j, SlotActionType actionType, PlayerEntity playerEntity, CallbackInfoReturnable<ItemStack> cir) {
-        if (i == 2 && this.getClass().equals(AnvilScreenHandler.class) && slots.get(2).canTakeItems(playerEntity)) {
-            AnvilTakeOutputCallback.EVENT.invoker().interact(slots.get(2).getStack());
+    public void onSlotClick(int slotIndex, int j, SlotActionType actionType, PlayerEntity player, CallbackInfoReturnable<ItemStack> cir) {
+        if (slotIndex == 2 && this.getClass().equals(AnvilScreenHandler.class) && slots.get(2).canTakeItems(player)) {
+            AnvilTakeOutputCallback.Companion.getEVENT().invoker().interact(slots.get(2).getStack());
         }
     }
 }

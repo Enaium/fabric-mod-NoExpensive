@@ -27,9 +27,9 @@ public class ContainerMixin {
 
     @SuppressWarnings({"ConstantValue", "EqualsBetweenInconvertibleTypes"})
     @Inject(at = @At("HEAD"), method = "onSlotClick")
-    public void onSlotClick(int slotId, int clickData, SlotActionType actionType, PlayerEntity playerEntity, CallbackInfoReturnable<ItemStack> cir) {
+    public void transferSlot(int slotId, int clickData, SlotActionType actionType, PlayerEntity playerEntity, CallbackInfoReturnable<ItemStack> cir) {
         if (slotId == 2 && this.getClass().equals(AnvilContainer.class) && slots.get(2).canTakeItems(playerEntity)) {
-            AnvilTakeOutputCallback.EVENT.invoker().interact(slots.get(2).getStack());
+            AnvilTakeOutputCallback.Companion.getEVENT().invoker().interact(slots.get(2).getStack());
         }
     }
 }

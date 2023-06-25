@@ -13,16 +13,16 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class AnvilContainerSlotMixin {
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/container/Property;get()I"), method = "canTakeItems")
     private int canTakeOutput(Property property) {
-        if (Config.getModel().maxLevel > 0) {
-            return Math.min(Math.abs(property.get()), Config.getModel().maxLevel);
+        if (Config.INSTANCE.getModel().getMaxLevel() > 0) {
+            return Math.min(Math.abs(property.get()), Config.INSTANCE.getModel().getMaxLevel());
         }
         return Math.abs(property.get());
     }
 
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/container/Property;get()I"), method = "onTakeItem")
     private int onTakeOutput(Property property) {
-        if (Config.getModel().maxLevel > 0) {
-            return Math.min(Math.abs(property.get()), Config.getModel().maxLevel);
+        if (Config.INSTANCE.getModel().getMaxLevel() > 0) {
+            return Math.min(Math.abs(property.get()), Config.INSTANCE.getModel().getMaxLevel());
         }
         return Math.abs(property.get());
     }

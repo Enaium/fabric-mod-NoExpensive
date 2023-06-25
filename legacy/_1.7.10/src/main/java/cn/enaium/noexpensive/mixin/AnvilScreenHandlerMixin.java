@@ -36,8 +36,8 @@ public abstract class AnvilScreenHandlerMixin extends ScreenHandler {
 
     @Redirect(at = @At(value = "FIELD", target = "Lnet/minecraft/screen/AnvilScreenHandler;repairCost:I", opcode = Opcodes.GETFIELD), method = "updateResult")
     private int repairCost(AnvilScreenHandler instance) {
-        if (Config.getModel().maxLevel > 0) {
-            return Math.min(Math.abs(instance.repairCost), Config.getModel().maxLevel);
+        if (Config.INSTANCE.getModel().getMaxLevel() > 0) {
+            return Math.min(Math.abs(instance.repairCost), Config.INSTANCE.getModel().getMaxLevel());
         }
         return Math.abs(instance.repairCost);
     }
@@ -45,7 +45,7 @@ public abstract class AnvilScreenHandlerMixin extends ScreenHandler {
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/inventory/Inventory;setInvStack(ILnet/minecraft/item/ItemStack;)V", shift = At.Shift.AFTER, ordinal = 3), method = "updateResult")
     public void setStack(CallbackInfo ci) {
         ItemStack o = resultInventory.getInvStack(0);
-        AnvilSetOutputCallback.EVENT.invoker().interact(o, Config.getModel().maxLevel > 0 ? Math.min(Math.abs(repairCost), Config.getModel().maxLevel) : (repairCost), getSlot(2).canTakeItems(player));
+        AnvilSetOutputCallback.Companion.getEVENT().invoker().interact(o, Config.INSTANCE.getModel().getMaxLevel() > 0 ? Math.min(Math.abs(repairCost), Config.INSTANCE.getModel().getMaxLevel()) : (repairCost), getSlot(2).canTakeItems(player));
     }
 
     @Redirect(at = @At(value = "FIELD", target = "Lnet/minecraft/entity/player/PlayerAbilities;creativeMode:Z", ordinal = 1), method = "updateResult")
@@ -55,7 +55,7 @@ public abstract class AnvilScreenHandlerMixin extends ScreenHandler {
 
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/enchantment/Enchantment;differs(Lnet/minecraft/enchantment/Enchantment;)Z"), method = "updateResult")
     private boolean isDifferent(Enchantment enchantment, Enchantment other) {
-        return EnchantmentCanCombineCallback.EVENT.invoker().interact(enchantment, other);
+        return EnchantmentCanCombineCallback.Companion.getEVENT().invoker().interact(enchantment, other);
     }
 
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/enchantment/Enchantment;getMaximumLevel()I"), method = "updateResult")
