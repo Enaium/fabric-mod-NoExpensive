@@ -24,9 +24,10 @@
     "noexpensive.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.14.19",
-    "minecraft": "1.10.x",
-    "legacy-fabric-api": "*"
+    "fabricloader": "*",
+    "minecraft": "${minecraft_version}",
+    "java": ">=${java_version}",
+    "${api_name}": "*"
   },
   "suggests": {
     "flamingo": "*"

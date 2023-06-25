@@ -65,10 +65,28 @@ subprojects {
     version = "${property("minecraft.version")}-${version}"
 
     tasks.processResources {
-        inputs.property("version", project.version)
+        inputs.property("currentTimeMillis", System.currentTimeMillis())
 
         filesMatching("fabric.mod.json") {
-            expand(mapOf("version" to project.version.toString()))
+            expand(
+                mapOf(
+                    "version" to project.version.toString(),
+                    "minecraft_version" to properties["minecraft.version"].toString()
+                        .let { "${it.subSequence(0, it.lastIndexOf("."))}.x" },
+                    "java_version" to properties["java.version"].toString(),
+                    "api_name" to if (parent?.name == "legacy") "legacy-fabric-api" else "fabric-api"
+                )
+            )
+        }
+
+        filesMatching("noexpensive.mixins.json") {
+            expand(
+                mapOf(
+                    "java_version" to properties["java.version"],
+                    "mixin_list" to file("src/main/java/cn/enaium/noexpensive/mixin").listFiles()
+                        ?.joinToString(", ", "[", "]") { it.name.subSequence(0, it.name.lastIndexOf(".")).toString() }
+                )
+            )
         }
     }
 
