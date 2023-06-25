@@ -3,7 +3,6 @@ package cn.enaium.noexpensive.callback
 import net.fabricmc.fabric.api.event.Event
 import net.fabricmc.fabric.api.event.EventFactory
 import net.minecraft.item.ItemStack
-import java.util.function.Function
 
 /**
  * @author Enaium

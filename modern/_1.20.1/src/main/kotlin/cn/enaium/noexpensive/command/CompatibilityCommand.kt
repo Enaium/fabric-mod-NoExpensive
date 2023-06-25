@@ -131,7 +131,7 @@ fun compatibilityCommand(dispatcher: CommandDispatcher<ServerCommandSource>, reg
                     var previous: MutableText? = null
                     for ((key, value) in compatibility) {
                         val keyItemStack = Items.ENCHANTED_BOOK.defaultStack
-                        keyItemStack.addEnchantment(Registries.ENCHANTMENT[Identifier(key)], 1)
+                        keyItemStack.addEnchantment(Registries.ENCHANTMENT[Identifier(key)] ?: continue, 1)
                         val enchantment = Text.literal(key).styled { style: Style ->
                             style.withHoverEvent(
                                 HoverEvent(
@@ -142,7 +142,7 @@ fun compatibilityCommand(dispatcher: CommandDispatcher<ServerCommandSource>, reg
                                 Formatting.AQUA
                             )
                         }
-                        if (!value.isEmpty()) {
+                        if (value.isNotEmpty()) {
                             enchantment.append(
                                 Text.literal(" -> ").styled { style: Style -> style.withColor(Formatting.YELLOW) })
                             for (s in value) {

@@ -1,14 +1,14 @@
 package cn.enaium.noexpensive
 
-import callback.AnvilSetOutputCallback
-import callback.AnvilTakeOutputCallback
-import callback.EnchantmentCanCombineCallback
-import callback.impl.AnvilSetOutputCallbackImpl
-import callback.impl.AnvilTakeOutputCallbackImpl
-import callback.impl.EnchantmentCanCombineCallbackImpl
-import command.compatibilityCommand
-import command.maxLevelCommand
-import command.reloadCommand
+import cn.enaium.noexpensive.callback.AnvilSetOutputCallback
+import cn.enaium.noexpensive.callback.AnvilTakeOutputCallback
+import cn.enaium.noexpensive.callback.EnchantmentCanCombineCallback
+import cn.enaium.noexpensive.callback.impl.AnvilSetOutputCallbackImpl
+import cn.enaium.noexpensive.callback.impl.AnvilTakeOutputCallbackImpl
+import cn.enaium.noexpensive.callback.impl.EnchantmentCanCombineCallbackImpl
+import cn.enaium.noexpensive.command.compatibilityCommand
+import cn.enaium.noexpensive.command.maxLevelCommand
+import cn.enaium.noexpensive.command.reloadCommand
 import com.mojang.brigadier.CommandDispatcher
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback
 import net.minecraft.server.command.CommandManager

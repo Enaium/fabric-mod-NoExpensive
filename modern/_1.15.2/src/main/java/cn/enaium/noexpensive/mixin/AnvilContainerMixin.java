@@ -1,8 +1,8 @@
 package cn.enaium.noexpensive.mixin;
 
 import cn.enaium.noexpensive.Config;
-import callback.AnvilSetOutputCallback;
-import callback.EnchantmentCanCombineCallback;
+import cn.enaium.noexpensive.callback.AnvilSetOutputCallback;
+import cn.enaium.noexpensive.callback.EnchantmentCanCombineCallback;
 import net.minecraft.container.AnvilContainer;
 import net.minecraft.container.Container;
 import net.minecraft.container.ContainerType;

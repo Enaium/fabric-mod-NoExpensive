@@ -2,7 +2,6 @@ package cn.enaium.noexpensive.callback.impl
 
 import cn.enaium.noexpensive.callback.AnvilSetOutputCallback
 import net.minecraft.item.ItemStack
-import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtList
 import net.minecraft.nbt.NbtString
 import net.minecraft.text.Style

@@ -2,7 +2,6 @@ package cn.enaium.noexpensive.callback.impl
 
 import cn.enaium.noexpensive.callback.AnvilTakeOutputCallback
 import net.minecraft.item.ItemStack
-import net.minecraft.nbt.NbtElement
 
 /**
  * @author Enaium

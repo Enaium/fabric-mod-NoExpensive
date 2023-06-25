@@ -1,6 +1,6 @@
 package cn.enaium.noexpensive.mixin;
 
-import callback.AnvilTakeOutputCallback;
+import cn.enaium.noexpensive.callback.AnvilTakeOutputCallback;
 import net.minecraft.container.AnvilContainer;
 import net.minecraft.container.Container;
 import net.minecraft.container.Slot;

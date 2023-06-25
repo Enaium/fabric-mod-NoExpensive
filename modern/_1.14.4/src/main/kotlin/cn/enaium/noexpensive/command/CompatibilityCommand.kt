@@ -9,7 +9,10 @@ import com.mojang.brigadier.context.CommandContext
 import net.minecraft.command.arguments.ItemEnchantmentArgumentType
 import net.minecraft.server.command.CommandManager
 import net.minecraft.server.command.ServerCommandSource
-import net.minecraft.text.*
+import net.minecraft.text.HoverEvent
+import net.minecraft.text.LiteralText
+import net.minecraft.text.Text
+import net.minecraft.text.TranslatableText
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
@@ -116,12 +119,12 @@ fun compatibilityCommand(dispatcher: CommandDispatcher<ServerCommandSource>) {
                                 HoverEvent(
                                     HoverEvent.Action.SHOW_TEXT,
                                     TranslatableText(
-                                        Registry.ENCHANTMENT[Identifier(key)]!!.translationKey
+                                        Registry.ENCHANTMENT[Identifier(key)]?.translationKey ?: return@styled
                                     )
                                 )
                             ).setColor(Formatting.AQUA)
                         }
-                        if (!value.isEmpty()) {
+                        if (value.isNotEmpty()) {
                             enchantment.append(LiteralText(" -> ").styled { style -> style.setColor(Formatting.YELLOW) })
                             for (s in value) {
                                 enchantment.append(LiteralText(s).styled { style ->
@@ -129,7 +132,7 @@ fun compatibilityCommand(dispatcher: CommandDispatcher<ServerCommandSource>) {
                                         HoverEvent(
                                             HoverEvent.Action.SHOW_TEXT,
                                             TranslatableText(
-                                                Registry.ENCHANTMENT[Identifier(key)]!!.translationKey
+                                                Registry.ENCHANTMENT[Identifier(key)]?.translationKey ?: return@styled
                                             )
                                         )
                                     ).setColor(Formatting.AQUA)

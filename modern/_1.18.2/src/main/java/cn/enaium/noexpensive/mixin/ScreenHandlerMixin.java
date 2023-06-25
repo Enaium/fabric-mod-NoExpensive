@@ -1,6 +1,6 @@
 package cn.enaium.noexpensive.mixin;
 
-import callback.AnvilTakeOutputCallback;
+import cn.enaium.noexpensive.callback.AnvilTakeOutputCallback;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.screen.AnvilScreenHandler;
 import net.minecraft.screen.ScreenHandler;
