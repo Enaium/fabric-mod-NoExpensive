@@ -1,5 +1,6 @@
 package cn.enaium.noexpensive.callback.impl
 
+import cn.enaium.noexpensive.Config
 import cn.enaium.noexpensive.callback.EnchantmentCanCombineCallback
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.util.ActionResult

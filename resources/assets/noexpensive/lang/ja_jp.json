@@ -1,7 +1,9 @@
 {
   "command.maxLevel.success": "最大レベルを %s に設定しました",
   "command.maxLevel.get": "最大レベルは %s です",
+  "command.maxLevel.error": "最大レベルは 0 以上である必要があります",
   "command.compatibility.put.success": "%s と %s を互換性ありとして設定しました",
   "command.compatibility.remove.success": "%s と %s の互換性を削除しました",
+  "command.compatibility.notFound": "%s は見つかりませんでした",
   "command.reload.success": "設定を再読み込みしました"
 }

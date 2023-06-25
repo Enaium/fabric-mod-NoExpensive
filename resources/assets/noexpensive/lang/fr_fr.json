@@ -1,7 +1,9 @@
 {
   "command.maxLevel.success": "Niveau maximum défini à %s",
   "command.maxLevel.get": "Le niveau maximum est actuellement défini à %s",
+  "command.maxLevel.error": "Le niveau maximum doit être supérieur ou égal à 0",
   "command.compatibility.put.success": "Le niveau %s est maintenant compatible avec le niveau %s",
   "command.compatibility.remove.success": "Le niveau %s n'est plus compatible avec le niveau %s",
+  "command.compatibility.notFound": "Le niveau %s n'existe pas",
   "command.reload.success": "Configuration rechargée"
 }

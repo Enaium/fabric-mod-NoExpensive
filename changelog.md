@@ -1,3 +1,4 @@
-## 🐞 Bug Fixes
+## 🆕 Features
 
-- Fix the overflow of repair costs when repairing too many times
+- Complete the all commands of the legacy game
+- Changed programming language from Java to Kotlin(⚠️ So you need to install the fabric-language-kotlin mod)

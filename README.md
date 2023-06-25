@@ -72,6 +72,5 @@ Protection, Projectile Protection, Blast Protection and Fire Protection among th
 
 ## Legacy version
 
-- Command only `/noexpensive reload`
 - The Compatibility config is number(enchantment id), not string(enchantment name), because the enchantment uses number
   to register in 1.7.x and below.

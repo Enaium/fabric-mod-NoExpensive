@@ -1,9 +1,9 @@
 package cn.enaium.noexpensive.callback.impl
 
+import cn.enaium.noexpensive.Config
 import cn.enaium.noexpensive.callback.EnchantmentCanCombineCallback
 import cn.enaium.noexpensive.mixin.EnchantmentMixin
 import net.minecraft.enchantment.Enchantment
-import java.util.*
 
 
 /**
@@ -11,8 +11,10 @@ import java.util.*
  */
 class EnchantmentCanCombineCallbackImpl : EnchantmentCanCombineCallback {
     override fun interact(enchantment1: Enchantment, enchantment2: Enchantment): Boolean {
-        val enchantment1Name: String = (enchantment1 as EnchantmentMixin).enchantmenT_MAP.entries.find { it.value == enchantment1 }?.key.toString()
-        val enchantment2Name: String = (enchantment2 as EnchantmentMixin).enchantmenT_MAP.entries.find { it.value == enchantment2 }?.key.toString()
+        val enchantment1Name: String =
+            (enchantment1 as EnchantmentMixin).enchantmenT_MAP.entries.find { it.value == enchantment1 }?.key.toString()
+        val enchantment2Name: String =
+            (enchantment2 as EnchantmentMixin).enchantmenT_MAP.entries.find { it.value == enchantment2 }?.key.toString()
         val compatibility: Map<String, List<String>> = Config.model.compatibility
         if (compatibility.containsKey(enchantment1Name) && compatibility[enchantment1Name]!!.contains(enchantment2Name)) {
             return true

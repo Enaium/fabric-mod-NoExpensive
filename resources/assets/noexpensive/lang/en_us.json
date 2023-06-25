@@ -1,7 +1,9 @@
 {
   "command.maxLevel.success": "Set max level to %s",
   "command.maxLevel.get": "Max level is %s",
+  "command.maxLevel.error": "Max level must be greater than or equal to 0",
   "command.compatibility.put.success": "Put %s and %s as compatible",
   "command.compatibility.remove.success": "Remove %s and %s as compatible",
+  "command.compatibility.notFound": "Not found %s",
   "command.reload.success": "Reloaded config successfully"
 }
