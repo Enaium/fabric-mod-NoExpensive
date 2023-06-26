@@ -157,8 +157,9 @@ fun compatibilityCommand(dispatcher: CommandDispatcher<ServerCommandSource>) {
                             previous.append(enchantment)
                         }
                     }
-                    val finalPrevious = previous
-                    context.source.sendFeedback(finalPrevious, false)
+                    if (previous != null) {
+                        context.source.sendFeedback(previous, false)
+                    }
                     Command.SINGLE_SUCCESS
                 })
         )

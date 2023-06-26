@@ -1,3 +1,4 @@
 ## 🐞 Bug fixes
 
-- 1.17 and below versions require incorrect fabric API name.
+- The `/noexpensive compatibility list` command does not work if the compatibility list is empty in server
+  environment. (#1)
