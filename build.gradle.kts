@@ -44,7 +44,7 @@ sourceSets {
 
 allprojects {
     group = "cn.enaium"
-    version = "1.8.0"
+    version = "1.8.1"
 }
 
 subprojects {
@@ -78,7 +78,7 @@ subprojects {
                     "minecraft_version" to properties["minecraft.version"].toString()
                         .let { "${it.subSequence(0, it.lastIndexOf("."))}.x" },
                     "java_version" to properties["java.version"].toString(),
-                    "api_name" to if (parent?.name == "legacy") "legacy-fabric-api" else "fabric-api"
+                    "api_name" to if (parent?.name == "legacy") "legacy-fabric-api-base" else "fabric-api-base"
                 )
             )
         }
