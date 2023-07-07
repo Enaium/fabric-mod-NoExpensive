@@ -1,4 +1,3 @@
 ## 🐞 Bug fixes
 
-- The `/noexpensive compatibility list` command does not work if the compatibility list is empty in the server
-  environment. (#23)
+- Allow the Anvil to be combined with both higher levels of Enchantment. (#24)
