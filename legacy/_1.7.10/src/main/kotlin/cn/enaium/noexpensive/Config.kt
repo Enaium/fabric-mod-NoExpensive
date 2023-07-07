@@ -36,6 +36,7 @@ object Config {
 
     class Model {
         var maxLevel = 39
+        var combineHigher = false
         var compatibility = mutableMapOf(
             16 to mutableListOf(17, 18),
             17 to mutableListOf(18, 16),

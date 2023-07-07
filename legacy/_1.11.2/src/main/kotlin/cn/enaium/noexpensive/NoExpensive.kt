@@ -6,7 +6,6 @@ import cn.enaium.noexpensive.callback.EnchantmentCanCombineCallback
 import cn.enaium.noexpensive.callback.impl.AnvilSetOutputCallbackImpl
 import cn.enaium.noexpensive.callback.impl.AnvilTakeOutputCallbackImpl
 import cn.enaium.noexpensive.callback.impl.EnchantmentCanCombineCallbackImpl
-import cn.enaium.noexpensive.command.NoExpensiveCommand
 import net.legacyfabric.fabric.api.registry.CommandRegistry
 
 /**

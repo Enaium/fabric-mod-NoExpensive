@@ -19,6 +19,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.Map;
+
 /**
  * @author Enaium
  */
@@ -62,5 +64,15 @@ public abstract class AnvilScreenHandlerMixin extends ScreenHandler {
     public int getMaxLevel(Enchantment instance) {
         //though it's the type of the max level is short, but it will be cast to byte when it's used
         return 255;
+    }
+
+    @Redirect(at = @At(value = "INVOKE", target = "Ljava/util/Map;get(Ljava/lang/Object;)Ljava/lang/Object;", ordinal = 1), method = "updateResult")
+    public Object intValue(Map<Integer, Integer> instance, Object key) {
+        final Integer enchantmentId = (Integer) key;
+        final Integer orDefault = instance.get(enchantmentId);
+        if (orDefault + 1 > Enchantment.ALL_ENCHANTMENTS[enchantmentId].getMaximumLevel() && !Config.INSTANCE.getModel().getCombineHigher()) {
+            return 0;
+        }
+        return orDefault;
     }
 }

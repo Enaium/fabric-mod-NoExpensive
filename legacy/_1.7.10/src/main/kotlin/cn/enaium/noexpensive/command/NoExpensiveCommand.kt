@@ -1,12 +1,15 @@
 package cn.enaium.noexpensive.command
 
 import cn.enaium.noexpensive.Config
+import cn.enaium.noexpensive.enums.Action
 import net.minecraft.command.AbstractCommand
 import net.minecraft.command.CommandSource
 import net.minecraft.command.NotFoundException
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.text.*
 import net.minecraft.util.Formatting
+import kotlin.random.Random
+import kotlin.random.nextInt
 
 /**
  * @author Enaium
@@ -24,7 +27,7 @@ class NoExpensiveCommand : AbstractCommand() {
         return null
     }
 
-    override fun execute(commandSource: CommandSource, args: Array<out String>) {
+    override fun execute(commandSource: CommandSource, args: Array<String>) {
         if (args.isEmpty()) {
             commandSource.sendMessage(LiteralText("§cNoExpensive §7by §bEnaium"))
             return
@@ -48,6 +51,15 @@ class NoExpensiveCommand : AbstractCommand() {
                 }
                 commandSource.sendMessage(TranslatableText("command.maxLevel.success", args[1]))
                 Config.save()
+            }
+        }
+
+        if (args[0].equals("combineHigher", ignoreCase = true)) {
+            if (args.size == 1) {
+                commandSource.sendMessage(TranslatableText("command.combineHigher.get", Config.model.combineHigher))
+            } else {
+                Config.model.combineHigher = args[1].toBoolean()
+                commandSource.sendMessage(TranslatableText("command.combineHigher.success", args[1]))
             }
         }
 
@@ -104,10 +116,22 @@ class NoExpensiveCommand : AbstractCommand() {
                     commandSource.sendMessage(TranslatableText("command.compatibility.notFound", args[3]))
                     return
                 }
-                if (args[1].equals("put", ignoreCase = true)) {
-                    if (compatibility.containsKey(enchantment1)) {
-                        if (!compatibility[enchantment1]!!.contains(enchantment2)) {
-                            compatibility[enchantment1]!!.add(enchantment2)
+
+                when (Action.valueOf(args[1])) {
+                    Action.PUT -> {
+                        if (compatibility.containsKey(enchantment1)) {
+                            if (!compatibility[enchantment1]!!.contains(enchantment2)) {
+                                compatibility[enchantment1]!!.add(enchantment2)
+                                commandSource.sendMessage(
+                                    TranslatableText(
+                                        "command.compatibility.put.success",
+                                        enchantment1,
+                                        enchantment2
+                                    )
+                                )
+                            }
+                        } else {
+                            compatibility[enchantment1] = ArrayList(listOf(enchantment2))
                             commandSource.sendMessage(
                                 TranslatableText(
                                     "command.compatibility.put.success",
@@ -116,32 +140,23 @@ class NoExpensiveCommand : AbstractCommand() {
                                 )
                             )
                         }
-                    } else {
-                        compatibility[enchantment1] = ArrayList(listOf(enchantment2))
-                        commandSource.sendMessage(
-                            TranslatableText(
-                                "command.compatibility.put.success",
-                                enchantment1,
-                                enchantment2
-                            )
-                        )
                     }
-                } else if (args[1].equals("remove", ignoreCase = true)) {
-                    if (compatibility.containsKey(enchantment1)) {
-                        compatibility[enchantment1]!!.remove(enchantment2)
-                        if (compatibility[enchantment1]!!.isEmpty()) {
-                            compatibility.remove(enchantment1)
+
+                    Action.REMOVE -> {
+                        if (compatibility.containsKey(enchantment1)) {
+                            compatibility[enchantment1]!!.remove(enchantment2)
+                            if (compatibility[enchantment1]!!.isEmpty()) {
+                                compatibility.remove(enchantment1)
+                            }
+                            commandSource.sendMessage(
+                                TranslatableText(
+                                    "command.compatibility.remove.success",
+                                    enchantment1,
+                                    enchantment2
+                                )
+                            )
                         }
-                        commandSource.sendMessage(
-                            TranslatableText(
-                                "command.compatibility.remove.success",
-                                enchantment1,
-                                enchantment2
-                            )
-                        )
                     }
-                } else {
-                    throw NotFoundException()
                 }
             }
         }
@@ -152,11 +167,13 @@ class NoExpensiveCommand : AbstractCommand() {
         strings: Array<out String>
     ): List<String> {
         if (strings.size == 1) {
-            return listOf("reload", "maxLevel", "compatibility")
+            return listOf("reload", "maxLevel", "compatibility", "combineHigher")
         }
         if (strings.size == 2) {
-            if (strings[0].equals("compatibility", ignoreCase = true)) {
-                return listOf("list", "put", "remove")
+            return when (strings[0]) {
+                "maxLevel" -> listOf(Random.nextInt(1..64).toString())
+                "combineHigher" -> listOf("true", "false")
+                else -> listOf("list") + Action.values().map { it.name }
             }
         }
         if (strings.size == 3 || strings.size == 4) {

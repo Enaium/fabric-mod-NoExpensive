@@ -36,6 +36,7 @@ object Config {
 
     class Model {
         var maxLevel = 39
+        var combineHigher = false
         var compatibility = mutableMapOf(
             "minecraft:sharpness" to mutableListOf("minecraft:smite", "minecraft:bane_of_arthropods"),
             "minecraft:smite" to mutableListOf("minecraft:bane_of_arthropods", "minecraft:sharpness"),
