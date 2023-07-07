@@ -6,6 +6,7 @@ import cn.enaium.noexpensive.callback.EnchantmentCanCombineCallback
 import cn.enaium.noexpensive.callback.impl.AnvilSetOutputCallbackImpl
 import cn.enaium.noexpensive.callback.impl.AnvilTakeOutputCallbackImpl
 import cn.enaium.noexpensive.callback.impl.EnchantmentCanCombineCallbackImpl
+import cn.enaium.noexpensive.command.combineHigherCommand
 import cn.enaium.noexpensive.command.compatibilityCommand
 import cn.enaium.noexpensive.command.maxLevelCommand
 import cn.enaium.noexpensive.command.reloadCommand
@@ -23,6 +24,7 @@ fun initializer() {
     CommandRegistrationCallback.EVENT.register(CommandRegistrationCallback { dispatcher: CommandDispatcher<ServerCommandSource>, registryAccess: CommandRegistryAccess, _: CommandManager.RegistrationEnvironment ->
         maxLevelCommand(dispatcher)
         compatibilityCommand(dispatcher, registryAccess)
+        combineHigherCommand(dispatcher)
         reloadCommand(dispatcher)
     })
     EnchantmentCanCombineCallback.EVENT.register(

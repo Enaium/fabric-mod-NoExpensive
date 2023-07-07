@@ -36,6 +36,7 @@ object Config {
 
     class Model {
         var maxLevel = 39
+        var combineHigher = false
         var compatibility = mutableMapOf(
             "minecraft:mending" to mutableListOf("minecraft:infinity"),
             "minecraft:multishot" to mutableListOf("minecraft:piercing"),
