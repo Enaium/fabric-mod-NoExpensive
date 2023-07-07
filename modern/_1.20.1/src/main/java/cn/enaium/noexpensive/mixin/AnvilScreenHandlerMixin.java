@@ -91,7 +91,7 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
         final Integer integer = ((Integer) defaultValue);
 
         final Integer orDefault = instance.getOrDefault(enchantment, integer);
-        if (orDefault + 1 > enchantment.getMaxLevel()) {
+        if (orDefault + 1 > enchantment.getMaxLevel() && !Config.INSTANCE.getModel().getCombineHigher()) {
             return 0;
         }
         return orDefault;

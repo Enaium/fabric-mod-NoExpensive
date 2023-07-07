@@ -5,5 +5,7 @@
   "command.compatibility.put.success": "Le niveau %s est maintenant compatible avec le niveau %s",
   "command.compatibility.remove.success": "Le niveau %s n'est plus compatible avec le niveau %s",
   "command.compatibility.notFound": "Le niveau %s n'existe pas",
+  "command.combineHigher.success": "La combinaison des enchantements de niveau supérieur est maintenant %s",
+  "command.combineHigher.get": "Permet de combiner les enchantements de niveau supérieur: %s",
   "command.reload.success": "Configuration rechargée"
 }
