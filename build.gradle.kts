@@ -109,7 +109,7 @@ subprojects {
     dependencies.add("modImplementation", "net.fabricmc:fabric-loader:${property("fabric.loader.version")}")
     dependencies.add(
         "modImplementation",
-        "net.fabricmc:fabric-language-kotlin:1.9.5+kotlin.${property("kotlinVersion")}"
+        "net.fabricmc:fabric-language-kotlin:1.10.10+kotlin.${property("kotlinVersion")}"
     ) {
         exclude(module = "*")
     }
