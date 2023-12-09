@@ -20,7 +20,7 @@ class AnvilSetOutputCallbackImpl : AnvilSetOutputCallback {
                 nbtCompound.put(ItemStack.LORE_KEY, NbtList())
                 nbtCompound.getList(ItemStack.LORE_KEY, NbtElement.LIST_TYPE.toInt()).add(
                     NbtString.of(
-                        Text.Serializer.toJson(
+                        Text.Serialization.toJsonString(
                             Text.translatable("container.repair.cost", levelCost).styled { style: Style ->
                                 style.withBold(true).withColor(if (canTake) Formatting.GREEN else Formatting.RED)
                             })

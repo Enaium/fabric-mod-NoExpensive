@@ -14,10 +14,10 @@ jobs:
           java-version: "17"
           distribution: "liberica"
       - name: Build with Gradle
-        uses: gradle/gradle-build-action@v2.4.2
+        uses: gradle/gradle-build-action@v2.10.0
         with:
           arguments: build
-          gradle-version: 8.1
+          gradle-version: 8.5
       - name: Upload jar to CurseForge
         uses: Kir-Antipov/mc-publish@v3.1
         with:
@@ -215,11 +215,11 @@ jobs:
         with:
           name: ""
           version: ""
-          files-primary: modern/_1.20.1/build/libs/NE-*.jar
+          files-primary: modern/_1.20.4/build/libs/NE-*.jar
           files-secondary: ""
           loaders: fabric
           game-versions: |
-            1.20.1
+            1.20.4
           dependencies: |
             fabric-api
             fabric-language-kotlin
