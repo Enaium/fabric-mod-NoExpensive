@@ -8,6 +8,7 @@ import com.mojang.brigadier.CommandDispatcher
 import com.mojang.brigadier.context.CommandContext
 import net.minecraft.command.CommandRegistryAccess
 import net.minecraft.command.argument.RegistryEntryArgumentType
+import net.minecraft.command.argument.RegistryEntryReferenceArgumentType
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.item.Items
 import net.minecraft.registry.Registries
@@ -35,7 +36,7 @@ fun compatibilityCommand(dispatcher: CommandDispatcher<ServerCommandSource>, reg
                         .then(
                             CommandManager.argument<RegistryEntry.Reference<Enchantment>>(
                                 "enchantment1",
-                                RegistryEntryArgumentType.registryEntry<Enchantment>(
+                                RegistryEntryReferenceArgumentType.registryEntry<Enchantment>(
                                     registryAccess,
                                     RegistryKeys.ENCHANTMENT
                                 )
@@ -43,15 +44,15 @@ fun compatibilityCommand(dispatcher: CommandDispatcher<ServerCommandSource>, reg
                                 .then(
                                     CommandManager.argument<RegistryEntry.Reference<Enchantment>>(
                                         "enchantment2",
-                                        RegistryEntryArgumentType.registryEntry<Enchantment>(
+                                        RegistryEntryReferenceArgumentType.registryEntry<Enchantment>(
                                             registryAccess,
                                             RegistryKeys.ENCHANTMENT
                                         )
                                     ).executes { context: CommandContext<ServerCommandSource> ->
                                         val enchantment1 =
-                                            RegistryEntryArgumentType.getEnchantment(context, "enchantment1")
+                                            RegistryEntryReferenceArgumentType.getEnchantment(context, "enchantment1")
                                         val enchantment2 =
-                                            RegistryEntryArgumentType.getEnchantment(context, "enchantment2")
+                                            RegistryEntryReferenceArgumentType.getEnchantment(context, "enchantment2")
                                         val enchantment1Name = enchantment1.registryKey().value.toString()
                                         val enchantment2Name = enchantment2.registryKey().value.toString()
                                         val enchantment1ItemStack = Items.ENCHANTED_BOOK.defaultStack

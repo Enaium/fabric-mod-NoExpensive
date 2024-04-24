@@ -3,6 +3,7 @@ package cn.enaium.noexpensive.mixin;
 import cn.enaium.noexpensive.Config;
 import cn.enaium.noexpensive.callback.AnvilSetOutputCallback;
 import cn.enaium.noexpensive.callback.EnchantmentCanCombineCallback;
+import net.minecraft.component.type.ItemEnchantmentsComponent;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.entity.player.PlayerInventory;
@@ -16,8 +17,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.util.Map;
 
 /**
  * @author Enaium
@@ -85,12 +84,9 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
         return 255;
     }
 
-    @Redirect(at = @At(value = "INVOKE", target = "Ljava/util/Map;getOrDefault(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;"), method = "updateResult")
-    public Object intValue(Map<Enchantment,Integer> instance, Object key, Object defaultValue) {
-        final Enchantment enchantment = (Enchantment) key;
-        final Integer integer = ((Integer) defaultValue);
-
-        final Integer orDefault = instance.getOrDefault(enchantment, integer);
+    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/component/type/ItemEnchantmentsComponent$Builder;getLevel(Lnet/minecraft/enchantment/Enchantment;)I"), method = "updateResult")
+    public int intValue(ItemEnchantmentsComponent.Builder instance, Enchantment enchantment) {
+        final int orDefault = instance.getLevel(enchantment);
         if (orDefault + 1 > enchantment.getMaxLevel() && !Config.INSTANCE.getModel().getCombineHigher()) {
             return 0;
         }
