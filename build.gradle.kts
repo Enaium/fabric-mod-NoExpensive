@@ -1,5 +1,6 @@
 import com.github.breadmoirai.githubreleaseplugin.GithubReleaseExtension
 import com.modrinth.minotaur.ModrinthExtension
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -124,9 +125,8 @@ subprojects {
     }
 
     tasks.withType<KotlinCompile> {
-        kotlinOptions {
-            freeCompilerArgs = listOf("-Xjsr305=strict")
-            jvmTarget = properties["java.version"].toString().let { if (it == "8") "1.8" else it }
+        compilerOptions {
+            jvmTarget.set(properties["java.version"].toString().let { if (it == "8") JvmTarget.JVM_1_8 else JvmTarget.fromTarget(it) })
         }
     }
 

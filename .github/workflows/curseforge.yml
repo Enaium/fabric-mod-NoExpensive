@@ -226,3 +226,19 @@ jobs:
           java: 21
           curseforge-id: 387108
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+      - name: Upload jar to CurseForge
+        uses: Kir-Antipov/mc-publish@v3.1
+        with:
+          name: ""
+          version: ""
+          files-primary: modern/_1.21/build/libs/NE-*.jar
+          files-secondary: ""
+          loaders: fabric
+          game-versions: |
+            1.21
+          dependencies: |
+            fabric-api
+            fabric-language-kotlin
+          java: 21
+          curseforge-id: 387108
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
