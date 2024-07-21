@@ -1,14 +1,17 @@
 package cn.enaium.noexpensive.callback.impl
 
 import cn.enaium.noexpensive.callback.AnvilTakeOutputCallback
+import net.minecraft.client.MinecraftClient
 import net.minecraft.client.resource.language.I18n
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 
 /**
  * @author Enaium
  */
 class AnvilTakeOutputCallbackImpl : AnvilTakeOutputCallback {
-    override fun interact(output: ItemStack) {
+    override fun interact(output: ItemStack, player: PlayerEntity) {
+        MinecraftClient.getInstance().player == player || player.abilities.creativeMode && return
         if (!output.equals(ItemStack.EMPTY)) {
             val nbtCompound = output.getOrCreateNbtCompound("display")
             val list = nbtCompound.getList("Lore", 8)

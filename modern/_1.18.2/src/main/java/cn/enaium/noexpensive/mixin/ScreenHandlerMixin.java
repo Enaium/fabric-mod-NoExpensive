@@ -27,7 +27,7 @@ public abstract class ScreenHandlerMixin {
     @Inject(at = @At("HEAD"), method = "onSlotClick")
     public void onSlotClick(int slotIndex, int button, SlotActionType actionType, PlayerEntity player, CallbackInfo ci) {
         if (slotIndex == 2 && this.getClass().equals(AnvilScreenHandler.class) && slots.get(2).canTakeItems(player)) {
-            AnvilTakeOutputCallback.Companion.getEVENT().invoker().interact(slots.get(2).getStack());
+            AnvilTakeOutputCallback.Companion.getEVENT().invoker().interact(slots.get(2).getStack(), player);
         }
     }
 }

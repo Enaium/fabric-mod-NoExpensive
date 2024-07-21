@@ -47,7 +47,7 @@ public abstract class AnvilScreenHandlerMixin extends ScreenHandler {
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/inventory/Inventory;setInvStack(ILnet/minecraft/item/ItemStack;)V", shift = At.Shift.AFTER, ordinal = 3), method = "updateResult")
     public void setStack(CallbackInfo ci) {
         ItemStack o = resultInventory.getInvStack(0);
-        AnvilSetOutputCallback.Companion.getEVENT().invoker().interact(o, Config.INSTANCE.getModel().getMaxLevel() > 0 ? Math.min(Math.abs(repairCost), Config.INSTANCE.getModel().getMaxLevel()) : (repairCost), slots.get(2).canTakeItems(player));
+        AnvilSetOutputCallback.Companion.getEVENT().invoker().interact(o, Config.INSTANCE.getModel().getMaxLevel() > 0 ? Math.min(Math.abs(repairCost), Config.INSTANCE.getModel().getMaxLevel()) : (repairCost), slots.get(2).canTakeItems(player), player);
     }
 
     @Redirect(at = @At(value = "FIELD", target = "Lnet/minecraft/entity/player/PlayerAbilities;creativeMode:Z", ordinal = 1), method = "updateResult")

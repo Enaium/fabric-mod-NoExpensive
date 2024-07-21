@@ -29,7 +29,7 @@ public class ContainerMixin {
     @Inject(at = @At("HEAD"), method = "onSlotClick")
     public void transferSlot(int slotId, int clickData, SlotActionType actionType, PlayerEntity playerEntity, CallbackInfoReturnable<ItemStack> cir) {
         if (slotId == 2 && this.getClass().equals(AnvilContainer.class) && slots.get(2).canTakeItems(playerEntity)) {
-            AnvilTakeOutputCallback.Companion.getEVENT().invoker().interact(slots.get(2).getStack());
+            AnvilTakeOutputCallback.Companion.getEVENT().invoker().interact(slots.get(2).getStack(), playerEntity);
         }
     }
 }

@@ -57,7 +57,7 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/inventory/CraftingResultInventory;setStack(ILnet/minecraft/item/ItemStack;)V", shift = At.Shift.AFTER, ordinal = 4), method = "updateResult")
     public void setStack(CallbackInfo ci) {
         ItemStack o = output.getStack(0);
-        AnvilSetOutputCallback.Companion.getEVENT().invoker().interact(o, getLevelCost(), canTakeOutput(player, false));
+        AnvilSetOutputCallback.Companion.getEVENT().invoker().interact(o, getLevelCost(), canTakeOutput(player, false), player);
     }
 
     @Redirect(at = @At(value = "FIELD", target = "Lnet/minecraft/entity/player/PlayerAbilities;creativeMode:Z", ordinal = 1), method = "updateResult")

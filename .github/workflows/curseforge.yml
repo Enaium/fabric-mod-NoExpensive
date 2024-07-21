@@ -8,23 +8,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Set up JDK 17
+      - name: Set up JDK 21
         uses: actions/setup-java@v3
         with:
-          java-version: "17"
+          java-version: "21"
           distribution: "liberica"
       - name: Build with Gradle
-        uses: gradle/gradle-build-action@v2.10.0
+        uses: gradle/gradle-build-action@v3.5.0
         with:
           arguments: build
-          gradle-version: 8.5
+          gradle-version: 8.9
       - name: Upload jar to CurseForge
-        uses: Kir-Antipov/mc-publish@v3.1
+        uses: Kir-Antipov/mc-publish@v3.3
         with:
           name: ""
           version: ""
-          files-primary: legacy/_1.7.10/build/libs/NE-*.jar
-          files-secondary: ""
+          files: legacy/_1.7.10/build/libs/NE-*.jar
           loaders: fabric
           game-versions: |
             1.7.10
@@ -35,12 +34,11 @@ jobs:
           curseforge-id: 387108
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
       - name: Upload jar to CurseForge
-        uses: Kir-Antipov/mc-publish@v3.1
+        uses: Kir-Antipov/mc-publish@v3.3
         with:
           name: ""
           version: ""
-          files-primary: legacy/_1.8.9/build/libs/NE-*.jar
-          files-secondary: ""
+          files: legacy/_1.8.9/build/libs/NE-*.jar
           loaders: fabric
           game-versions: |
             1.8.9
@@ -51,12 +49,11 @@ jobs:
           curseforge-id: 387108
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
       - name: Upload jar to CurseForge
-        uses: Kir-Antipov/mc-publish@v3.1
+        uses: Kir-Antipov/mc-publish@v3.3
         with:
           name: ""
           version: ""
-          files-primary: legacy/_1.9.4/build/libs/NE-*.jar
-          files-secondary: ""
+          files: legacy/_1.9.4/build/libs/NE-*.jar
           loaders: fabric
           game-versions: |
             1.9.4
@@ -67,12 +64,11 @@ jobs:
           curseforge-id: 387108
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
       - name: Upload jar to CurseForge
-        uses: Kir-Antipov/mc-publish@v3.1
+        uses: Kir-Antipov/mc-publish@v3.3
         with:
           name: ""
           version: ""
-          files-primary: legacy/_1.10.2/build/libs/NE-*.jar
-          files-secondary: ""
+          files: legacy/_1.10.2/build/libs/NE-*.jar
           loaders: fabric
           game-versions: |
             1.10.2
@@ -83,12 +79,11 @@ jobs:
           curseforge-id: 387108
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
       - name: Upload jar to CurseForge
-        uses: Kir-Antipov/mc-publish@v3.1
+        uses: Kir-Antipov/mc-publish@v3.3
         with:
           name: ""
           version: ""
-          files-primary: legacy/_1.11.2/build/libs/NE-*.jar
-          files-secondary: ""
+          files: legacy/_1.11.2/build/libs/NE-*.jar
           loaders: fabric
           game-versions: |
             1.11.2
@@ -99,12 +94,11 @@ jobs:
           curseforge-id: 387108
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
       - name: Upload jar to CurseForge
-        uses: Kir-Antipov/mc-publish@v3.1
+        uses: Kir-Antipov/mc-publish@v3.3
         with:
           name: ""
           version: ""
-          files-primary: legacy/_1.12.2/build/libs/NE-*.jar
-          files-secondary: ""
+          files: legacy/_1.12.2/build/libs/NE-*.jar
           loaders: fabric
           game-versions: |
             1.12.2
@@ -115,12 +109,11 @@ jobs:
           curseforge-id: 387108
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
       - name: Upload jar to CurseForge
-        uses: Kir-Antipov/mc-publish@v3.1
+        uses: Kir-Antipov/mc-publish@v3.3
         with:
           name: ""
           version: ""
-          files-primary: modern/_1.14.4/build/libs/NE-*.jar
-          files-secondary: ""
+          files: modern/_1.14.4/build/libs/NE-*.jar
           loaders: fabric
           game-versions: |
             1.14.4
@@ -131,12 +124,11 @@ jobs:
           curseforge-id: 387108
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
       - name: Upload jar to CurseForge
-        uses: Kir-Antipov/mc-publish@v3.1
+        uses: Kir-Antipov/mc-publish@v3.3
         with:
           name: ""
           version: ""
-          files-primary: modern/_1.15.2/build/libs/NE-*.jar
-          files-secondary: ""
+          files: modern/_1.15.2/build/libs/NE-*.jar
           loaders: fabric
           game-versions: |
             1.15.2
@@ -147,12 +139,11 @@ jobs:
           curseforge-id: 387108
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
       - name: Upload jar to CurseForge
-        uses: Kir-Antipov/mc-publish@v3.1
+        uses: Kir-Antipov/mc-publish@v3.3
         with:
           name: ""
           version: ""
-          files-primary: modern/_1.16.5/build/libs/NE-*.jar
-          files-secondary: ""
+          files: modern/_1.16.5/build/libs/NE-*.jar
           loaders: fabric
           game-versions: |
             1.16.5
@@ -163,12 +154,11 @@ jobs:
           curseforge-id: 387108
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
       - name: Upload jar to CurseForge
-        uses: Kir-Antipov/mc-publish@v3.1
+        uses: Kir-Antipov/mc-publish@v3.3
         with:
           name: ""
           version: ""
-          files-primary: modern/_1.17.1/build/libs/NE-*.jar
-          files-secondary: ""
+          files: modern/_1.17.1/build/libs/NE-*.jar
           loaders: fabric
           game-versions: |
             1.17.1
@@ -179,12 +169,11 @@ jobs:
           curseforge-id: 387108
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
       - name: Upload jar to CurseForge
-        uses: Kir-Antipov/mc-publish@v3.1
+        uses: Kir-Antipov/mc-publish@v3.3
         with:
           name: ""
           version: ""
-          files-primary: modern/_1.18.2/build/libs/NE-*.jar
-          files-secondary: ""
+          files: modern/_1.18.2/build/libs/NE-*.jar
           loaders: fabric
           game-versions: |
             1.18.2
@@ -195,12 +184,11 @@ jobs:
           curseforge-id: 387108
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
       - name: Upload jar to CurseForge
-        uses: Kir-Antipov/mc-publish@v3.1
+        uses: Kir-Antipov/mc-publish@v3.3
         with:
           name: ""
           version: ""
-          files-primary: modern/_1.19.4/build/libs/NE-*.jar
-          files-secondary: ""
+          files: modern/_1.19.4/build/libs/NE-*.jar
           loaders: fabric
           game-versions: |
             1.19.4
@@ -211,12 +199,11 @@ jobs:
           curseforge-id: 387108
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
       - name: Upload jar to CurseForge
-        uses: Kir-Antipov/mc-publish@v3.1
+        uses: Kir-Antipov/mc-publish@v3.3
         with:
           name: ""
           version: ""
-          files-primary: modern/_1.20.6/build/libs/NE-*.jar
-          files-secondary: ""
+          files: modern/_1.20.6/build/libs/NE-*.jar
           loaders: fabric
           game-versions: |
             1.20.6
@@ -227,12 +214,11 @@ jobs:
           curseforge-id: 387108
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
       - name: Upload jar to CurseForge
-        uses: Kir-Antipov/mc-publish@v3.1
+        uses: Kir-Antipov/mc-publish@v3.3
         with:
           name: ""
           version: ""
-          files-primary: modern/_1.21/build/libs/NE-*.jar
-          files-secondary: ""
+          files: modern/_1.21/build/libs/NE-*.jar
           loaders: fabric
           game-versions: |
             1.21

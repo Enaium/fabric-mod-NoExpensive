@@ -26,7 +26,7 @@ public class ScreenHandlerMixin {
     @Inject(at = @At("HEAD"), method = "onSlotClick(IIILnet/minecraft/entity/player/PlayerEntity;)Lnet/minecraft/item/ItemStack;")
     public void transferSlot(int slotId, int clickData, int actionType, PlayerEntity player, CallbackInfoReturnable<ItemStack> cir) {
         if (slotId == 2 && this.getClass().equals(AnvilScreenHandler.class) && slots.get(2).canTakeItems(player)) {
-            AnvilTakeOutputCallback.Companion.getEVENT().invoker().interact(slots.get(2).getStack());
+            AnvilTakeOutputCallback.Companion.getEVENT().invoker().interact(slots.get(2).getStack(), player);
         }
     }
 }
