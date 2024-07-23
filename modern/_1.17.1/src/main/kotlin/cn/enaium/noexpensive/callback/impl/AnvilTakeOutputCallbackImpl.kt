@@ -1,7 +1,6 @@
 package cn.enaium.noexpensive.callback.impl
 
 import cn.enaium.noexpensive.callback.AnvilTakeOutputCallback
-import net.minecraft.client.MinecraftClient
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtElement
@@ -9,9 +8,9 @@ import net.minecraft.nbt.NbtElement
 /**
  * @author Enaium
  */
-class AnvilTakeOutputCallbackImpl : AnvilTakeOutputCallback {
+abstract class AnvilTakeOutputCallbackImpl : AnvilTakeOutputCallback {
     override fun interact(output: ItemStack, player: PlayerEntity) {
-        MinecraftClient.getInstance().player == player || player.abilities.creativeMode && return
+        condition(player) && return
         val nbtCompound = output.getOrCreateSubNbt(ItemStack.DISPLAY_KEY)
         val list = nbtCompound.getList(ItemStack.LORE_KEY, NbtElement.STRING_TYPE.toInt())
         for (i in list.indices) {
@@ -21,4 +20,6 @@ class AnvilTakeOutputCallbackImpl : AnvilTakeOutputCallback {
             }
         }
     }
+
+    abstract fun condition(player: PlayerEntity): Boolean
 }

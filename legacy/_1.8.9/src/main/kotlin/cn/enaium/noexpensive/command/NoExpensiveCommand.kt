@@ -6,13 +6,11 @@ import net.minecraft.command.AbstractCommand
 import net.minecraft.command.CommandSource
 import net.minecraft.command.NotFoundException
 import net.minecraft.enchantment.Enchantment
-import net.minecraft.server.MinecraftServer
 import net.minecraft.text.HoverEvent
 import net.minecraft.text.LiteralText
 import net.minecraft.text.Style
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.Formatting
-import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 import kotlin.random.Random
 import kotlin.random.nextInt

@@ -1,7 +1,6 @@
 package cn.enaium.noexpensive.callback.impl
 
 import cn.enaium.noexpensive.callback.AnvilSetOutputCallback
-import net.minecraft.client.MinecraftClient
 import net.minecraft.component.DataComponentTypes
 import net.minecraft.component.type.LoreComponent
 import net.minecraft.entity.player.PlayerEntity
@@ -13,9 +12,9 @@ import net.minecraft.util.Formatting
 /**
  * @author Enaium
  */
-class AnvilSetOutputCallbackImpl : AnvilSetOutputCallback {
+abstract class AnvilSetOutputCallbackImpl : AnvilSetOutputCallback {
     override fun interact(output: ItemStack, levelCost: Int, canTake: Boolean, player: PlayerEntity) {
-        MinecraftClient.getInstance().player == player || player.abilities.creativeMode && return
+        condition(player) && return
         if (output != ItemStack.EMPTY) {
             if (output.components != null) {
                 output.apply(DataComponentTypes.LORE, LoreComponent.DEFAULT) {
@@ -26,4 +25,6 @@ class AnvilSetOutputCallbackImpl : AnvilSetOutputCallback {
             }
         }
     }
+
+    abstract fun condition(player: PlayerEntity): Boolean
 }

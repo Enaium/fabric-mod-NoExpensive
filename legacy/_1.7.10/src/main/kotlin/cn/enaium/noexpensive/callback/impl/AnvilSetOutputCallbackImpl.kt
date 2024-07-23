@@ -14,7 +14,7 @@ import net.minecraft.nbt.NbtString
 /**
  * @author Enaium
  */
-class AnvilSetOutputCallbackImpl : AnvilSetOutputCallback {
+abstract class AnvilSetOutputCallbackImpl : AnvilSetOutputCallback {
     override fun interact(output: ItemStack?, levelCost: Int, canTake: Boolean, player: PlayerEntity) {
         MinecraftClient.getInstance().field_3805 == player || player.abilities.creativeMode && return
         if (output != null) {
@@ -32,4 +32,6 @@ class AnvilSetOutputCallbackImpl : AnvilSetOutputCallback {
             }
         }
     }
+
+    abstract fun condition(player: PlayerEntity): Boolean
 }

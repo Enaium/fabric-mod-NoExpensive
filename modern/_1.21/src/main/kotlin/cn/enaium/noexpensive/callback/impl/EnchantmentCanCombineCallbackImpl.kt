@@ -3,10 +3,8 @@ package cn.enaium.noexpensive.callback.impl
 import cn.enaium.noexpensive.Config
 import cn.enaium.noexpensive.callback.EnchantmentCanCombineCallback
 import net.minecraft.enchantment.Enchantment
-import net.minecraft.registry.Registries
 import net.minecraft.registry.entry.RegistryEntry
 import net.minecraft.util.ActionResult
-import java.util.*
 
 /**
  * @author Enaium

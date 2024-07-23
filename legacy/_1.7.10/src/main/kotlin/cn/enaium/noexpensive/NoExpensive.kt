@@ -3,9 +3,7 @@ package cn.enaium.noexpensive
 import cn.enaium.noexpensive.callback.AnvilSetOutputCallback
 import cn.enaium.noexpensive.callback.AnvilTakeOutputCallback
 import cn.enaium.noexpensive.callback.EnchantmentCanCombineCallback
-import cn.enaium.noexpensive.callback.impl.AnvilSetOutputCallbackImpl
-import cn.enaium.noexpensive.callback.impl.AnvilTakeOutputCallbackImpl
-import cn.enaium.noexpensive.callback.impl.EnchantmentCanCombineCallbackImpl
+import cn.enaium.noexpensive.callback.impl.*
 import cn.enaium.noexpensive.command.NoExpensiveCommand
 import net.legacyfabric.fabric.api.registry.CommandRegistry
 
@@ -16,8 +14,22 @@ fun initializer() {
     println("Hello NoExpensive world!")
     CommandRegistry.INSTANCE.register(NoExpensiveCommand())
     EnchantmentCanCombineCallback.EVENT.register(EnchantmentCanCombineCallbackImpl())
-    AnvilSetOutputCallback.EVENT.register(AnvilSetOutputCallbackImpl())
-    AnvilTakeOutputCallback.EVENT.register(AnvilTakeOutputCallbackImpl())
     Config.load()
     Runtime.getRuntime().addShutdownHook(Thread { Config.save() })
+}
+
+object Client {
+    @JvmStatic
+    fun client() {
+        AnvilSetOutputCallback.EVENT.register(AnvilSetOutputCallbackClientImpl())
+        AnvilTakeOutputCallback.EVENT.register(AnvilTakeOutputCallbackClientImpl())
+    }
+}
+
+object Server {
+    @JvmStatic
+    fun server() {
+        AnvilSetOutputCallback.EVENT.register(AnvilSetOutputCallbackServerImpl())
+        AnvilTakeOutputCallback.EVENT.register(AnvilTakeOutputCallbackServerImpl())
+    }
 }

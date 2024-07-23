@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.screen.*;
 import net.minecraft.util.ActionResult;
 import org.jetbrains.annotations.Nullable;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -24,8 +25,8 @@ import java.util.Map;
  */
 @Mixin(AnvilScreenHandler.class)
 public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
-    @Shadow
-    public abstract int getLevelCost();
+
+    @Shadow @Final private Property levelCost;
 
     public AnvilScreenHandlerMixin(@Nullable ScreenHandlerType<?> type, int syncId, PlayerInventory playerInventory, ScreenHandlerContext context) {
         super(type, syncId, playerInventory, context);
@@ -58,20 +59,12 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/inventory/CraftingResultInventory;setStack(ILnet/minecraft/item/ItemStack;)V", shift = At.Shift.AFTER, ordinal = 4), method = "updateResult")
     public void setStack(CallbackInfo ci) {
         ItemStack o = output.getStack(0);
-        AnvilSetOutputCallback.Companion.getEVENT().invoker().interact(o, getLevelCost(), canTakeOutput(player, false), player);
+        AnvilSetOutputCallback.Companion.getEVENT().invoker().interact(o, levelCost.get(), canTakeOutput(player, false), player);
     }
 
     @Redirect(at = @At(value = "FIELD", target = "Lnet/minecraft/entity/player/PlayerAbilities;creativeMode:Z", ordinal = 1), method = "updateResult")
     private boolean creativeMode(PlayerAbilities instance) {
         return true;
-    }
-
-    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/screen/Property;get()I"), method = "getLevelCost")
-    private int getLevelCost(Property property) {
-        if (Config.INSTANCE.getModel().getMaxLevel() > 0) {
-            return Math.min(Math.abs(property.get()), Config.INSTANCE.getModel().getMaxLevel());
-        }
-        return Math.abs(property.get());
     }
 
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/enchantment/Enchantment;canCombine(Lnet/minecraft/enchantment/Enchantment;)Z"), method = "updateResult")

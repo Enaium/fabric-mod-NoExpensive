@@ -1,7 +1,6 @@
 package cn.enaium.noexpensive.callback.impl
 
 import cn.enaium.noexpensive.callback.AnvilSetOutputCallback
-import net.minecraft.client.MinecraftClient
 import net.minecraft.client.resource.language.I18n
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
@@ -12,9 +11,9 @@ import net.minecraft.nbt.NbtString
 /**
  * @author Enaium
  */
-class AnvilSetOutputCallbackImpl : AnvilSetOutputCallback {
+abstract class AnvilSetOutputCallbackImpl : AnvilSetOutputCallback {
     override fun interact(output: ItemStack?, levelCost: Int, canTake: Boolean, player: PlayerEntity) {
-        MinecraftClient.getInstance().player == player || player.abilities.creativeMode && return
+        condition(player) && return
         if (output != null) {
             if (output.nbt != null) {
                 val nbtCompound = output.getSubNbt("display", true)
@@ -30,4 +29,6 @@ class AnvilSetOutputCallbackImpl : AnvilSetOutputCallback {
             }
         }
     }
+
+    abstract fun condition(player: PlayerEntity): Boolean
 }

@@ -7,7 +7,6 @@ import com.mojang.brigadier.Command
 import com.mojang.brigadier.CommandDispatcher
 import com.mojang.brigadier.context.CommandContext
 import net.minecraft.command.CommandRegistryAccess
-import net.minecraft.command.argument.RegistryEntryArgumentType
 import net.minecraft.command.argument.RegistryEntryReferenceArgumentType
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.item.Items

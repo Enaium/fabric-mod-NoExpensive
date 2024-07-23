@@ -1,3 +1,3 @@
-## 🛠️ Changes
+## 🐞 Bug fixes
 
-- Remove the cost of lore in singleplayer
+- Cannot load class in environment type SERVER

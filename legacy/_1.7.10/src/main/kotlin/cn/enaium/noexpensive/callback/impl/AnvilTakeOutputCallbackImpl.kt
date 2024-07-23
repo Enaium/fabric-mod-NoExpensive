@@ -12,7 +12,7 @@ import net.minecraft.nbt.NbtCompound
 /**
  * @author Enaium
  */
-class AnvilTakeOutputCallbackImpl : AnvilTakeOutputCallback {
+abstract class AnvilTakeOutputCallbackImpl : AnvilTakeOutputCallback {
     override fun interact(output: ItemStack?, player: PlayerEntity) {
         MinecraftClient.getInstance().field_3805 == player || player.abilities.creativeMode && return
         if (output != null) {
@@ -27,4 +27,6 @@ class AnvilTakeOutputCallbackImpl : AnvilTakeOutputCallback {
             }
         }
     }
+
+    abstract fun condition(player: PlayerEntity): Boolean
 }

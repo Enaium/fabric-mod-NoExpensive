@@ -18,6 +18,12 @@
   "entrypoints": {
     "main": [
       "cn.enaium.noexpensive.NoExpensiveKt::initializer"
+    ],
+    "client": [
+      "cn.enaium.noexpensive.Client::client"
+    ],
+    "server": [
+      "cn.enaium.noexpensive.Server::server"
     ]
   },
   "mixins": [
