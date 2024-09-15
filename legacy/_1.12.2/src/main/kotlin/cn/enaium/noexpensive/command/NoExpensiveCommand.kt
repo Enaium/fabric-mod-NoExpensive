@@ -39,6 +39,11 @@ class NoExpensiveCommand : AbstractCommand() {
             commandSource.sendMessage(TranslatableText("command.reload.success"))
         }
 
+        if (args[0].equals("reset", ignoreCase = true)) {
+            Config.reset()
+            commandSource.sendMessage(TranslatableText("command.reset.success"))
+        }
+
         if (args[0].equals("maxLevel", ignoreCase = true)) {
             if (args.size == 1) {
                 commandSource.sendMessage(TranslatableText("command.maxLevel.get", Config.model.maxLevel))
@@ -173,7 +178,7 @@ class NoExpensiveCommand : AbstractCommand() {
         pos: BlockPos?
     ): List<String> {
         if (strings.size == 1) {
-            return listOf("reload", "maxLevel", "compatibility", "combineHigher")
+            return listOf("reload", "reset", "maxLevel", "compatibility", "combineHigher")
         }
         if (strings.size == 2) {
             return when (strings[0]) {

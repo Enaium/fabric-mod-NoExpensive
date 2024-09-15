@@ -4,10 +4,7 @@ import cn.enaium.noexpensive.callback.AnvilSetOutputCallback
 import cn.enaium.noexpensive.callback.AnvilTakeOutputCallback
 import cn.enaium.noexpensive.callback.EnchantmentCanCombineCallback
 import cn.enaium.noexpensive.callback.impl.*
-import cn.enaium.noexpensive.command.combineHigherCommand
-import cn.enaium.noexpensive.command.compatibilityCommand
-import cn.enaium.noexpensive.command.maxLevelCommand
-import cn.enaium.noexpensive.command.reloadCommand
+import cn.enaium.noexpensive.command.*
 import com.mojang.brigadier.CommandDispatcher
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback
 import net.minecraft.server.command.CommandManager
@@ -23,6 +20,7 @@ fun initializer() {
         compatibilityCommand(dispatcher)
         combineHigherCommand(dispatcher)
         reloadCommand(dispatcher)
+        reset(dispatcher)
     })
     EnchantmentCanCombineCallback.EVENT.register(
         EnchantmentCanCombineCallbackImpl()

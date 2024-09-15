@@ -7,5 +7,6 @@
   "command.compatibility.notFound": "Le niveau %s n'existe pas",
   "command.combineHigher.success": "La combinaison des enchantements de niveau supérieur est maintenant %s",
   "command.combineHigher.get": "Permet de combiner les enchantements de niveau supérieur: %s",
-  "command.reload.success": "Configuration rechargée"
+  "command.reload.success": "Configuration rechargée",
+  "command.reset.success": "Configuration réinitialisée"
 }

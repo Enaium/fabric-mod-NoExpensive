@@ -2,7 +2,8 @@
 
 The anvil has no expensive restrictions and compatible to any enchantment.
 
-![Version](https://img.shields.io/github/v/tag/Enaium-FabricMC/NoExpensive?label=version&style=flat-square) [![CurseForge](http://cf.way2muchnoise.eu/title/387108.svg)](https://www.curseforge.com/minecraft/mc-mods/noexpensive) [modrinth](https://modrinth.com/mod/noexpensive)
+![Version](https://img.shields.io/github/v/tag/Enaium/fabric-mod-NoExpensive?label=version&style=flat-square&logo=github)
+[![CurseForge Downloads](https://img.shields.io/curseforge/dt/387108?style=flat-square&logo=curseforge)](https://www.curseforge.com/minecraft/mc-mods/noexpensive)
 
 ## Commands
 
@@ -15,6 +16,7 @@ The anvil has no expensive restrictions and compatible to any enchantment.
 - `/noexpensive compatibility REMOVE <enchantment> <enchantment>` Remove a compatibility between two enchantments.
 - `/noexpensive compatibility list` List all compatibilities.
 - `/noexpensive reload` Reload the config.
+- `/noexpensive reset` Reset the config.
 
 ## Config
 
@@ -29,6 +31,7 @@ Protection, Projectile Protection, Blast Protection and Fire Protection among th
 ```json
 {
   "maxLevel": 39,
+  "combineHigher": false,
   "compatibility": {
     "minecraft:mending": [
       "minecraft:infinity"
@@ -47,6 +50,18 @@ Protection, Projectile Protection, Blast Protection and Fire Protection among th
     "minecraft:bane_of_arthropods": [
       "minecraft:sharpness",
       "minecraft:smite"
+    ],
+    "minecraft:density": [
+      "minecraft:breach",
+      "minecraft:sharpness",
+      "minecraft:smite",
+      "minecraft:bane_of_arthropods"
+    ],
+    "minecraft:breach": [
+      "minecraft:density",
+      "minecraft:sharpness",
+      "minecraft:smite",
+      "minecraft:bane_of_arthropods"
     ],
     "minecraft:protection": [
       "minecraft:projectile_protection",

@@ -7,5 +7,6 @@
   "command.compatibility.notFound": "%s は見つかりませんでした",
   "command.combineHigher.success": "高レベルエンチャントの結合を %s に設定しました",
   "command.combineHigher.get": "高レベルエンチャントの結合を許可: %s",
-  "command.reload.success": "設定を再読み込みしました"
+  "command.reload.success": "設定を再読み込みしました",
+  "command.reset.success": "設定をリセットしました"
 }

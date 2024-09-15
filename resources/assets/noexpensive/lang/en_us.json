@@ -7,5 +7,6 @@
   "command.compatibility.notFound": "Not found %s",
   "command.combineHigher.success": "Set combine higher level enchantments to %s",
   "command.combineHigher.get": "Allows to combine higher level enchantments: %s",
-  "command.reload.success": "Reloaded config successfully"
+  "command.reload.success": "Reloaded config successfully",
+  "command.reset.success": "Reset config successfully"
 }

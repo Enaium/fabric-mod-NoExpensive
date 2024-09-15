@@ -34,6 +34,11 @@ object Config {
         }
     }
 
+    fun reset() {
+        model = Model()
+        save()
+    }
+
     class Model {
         var maxLevel = 39
         var combineHigher = false

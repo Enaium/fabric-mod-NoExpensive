@@ -34,6 +34,11 @@ object Config {
         }
     }
 
+    fun reset() {
+        model = Model()
+        save()
+    }
+
     class Model {
         var maxLevel = 39
         var combineHigher = false
@@ -43,6 +48,18 @@ object Config {
             "minecraft:sharpness" to mutableListOf("minecraft:smite", "minecraft:bane_of_arthropods"),
             "minecraft:smite" to mutableListOf("minecraft:bane_of_arthropods", "minecraft:sharpness"),
             "minecraft:bane_of_arthropods" to mutableListOf("minecraft:sharpness", "minecraft:smite"),
+            "minecraft:density" to mutableListOf(
+                "minecraft:breach",
+                "minecraft:sharpness",
+                "minecraft:smite",
+                "minecraft:bane_of_arthropods"
+            ),
+            "minecraft:breach" to mutableListOf(
+                "minecraft:density",
+                "minecraft:sharpness",
+                "minecraft:smite",
+                "minecraft:bane_of_arthropods"
+            ),
             "minecraft:protection" to mutableListOf(
                 "minecraft:projectile_protection",
                 "minecraft:blast_protection",

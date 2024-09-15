@@ -7,5 +7,6 @@
   "command.compatibility.notFound": "未找到 %s",
   "command.combineHigher.success": "设置允许合并更高等级附魔为 %s",
   "command.combineHigher.get": "允许合并更高等级附魔: %s",
-  "command.reload.success": "重载配置文件成功"
+  "command.reload.success": "重载配置文件成功",
+  "command.reset.success": "重置配置文件成功"
 }

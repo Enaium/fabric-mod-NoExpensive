@@ -26,7 +26,9 @@ import java.util.Map;
 @Mixin(AnvilScreenHandler.class)
 public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
 
-    @Shadow @Final private Property levelCost;
+    @Shadow
+    @Final
+    private Property levelCost;
 
     public AnvilScreenHandlerMixin(@Nullable ScreenHandlerType<?> type, int syncId, PlayerInventory playerInventory, ScreenHandlerContext context) {
         super(type, syncId, playerInventory, context);
@@ -79,7 +81,7 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
     }
 
     @Redirect(at = @At(value = "INVOKE", target = "Ljava/util/Map;getOrDefault(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;"), method = "updateResult")
-    public Object intValue(Map<Enchantment,Integer> instance, Object key, Object defaultValue) {
+    public Object intValue(Map<Enchantment, Integer> instance, Object key, Object defaultValue) {
         final Enchantment enchantment = (Enchantment) key;
         final Integer integer = ((Integer) defaultValue);
 
