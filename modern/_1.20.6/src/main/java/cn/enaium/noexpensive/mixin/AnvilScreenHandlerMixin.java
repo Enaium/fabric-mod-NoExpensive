@@ -81,15 +81,6 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/enchantment/Enchantment;getMaxLevel()I"), method = "updateResult")
     public int getMaxLevel(Enchantment instance) {
         //though it's the type of the max level is short, but it will be cast to byte when it's used
-        return 255;
-    }
-
-    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/component/type/ItemEnchantmentsComponent$Builder;getLevel(Lnet/minecraft/enchantment/Enchantment;)I"), method = "updateResult")
-    public int intValue(ItemEnchantmentsComponent.Builder instance, Enchantment enchantment) {
-        final int orDefault = instance.getLevel(enchantment);
-        if (orDefault + 1 > enchantment.getMaxLevel() && !Config.INSTANCE.getModel().getCombineHigher()) {
-            return 0;
-        }
-        return orDefault;
+        return Config.INSTANCE.getModel().getCombineHigher() ? 255 : instance.getMaxLevel();
     }
 }

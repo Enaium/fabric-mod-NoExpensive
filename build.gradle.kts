@@ -45,7 +45,7 @@ sourceSets {
 
 allprojects {
     group = "cn.enaium"
-    version = "1.10.0"
+    version = "1.10.1"
 }
 
 subprojects {
