@@ -17,7 +17,7 @@ jobs:
         uses: gradle/gradle-build-action@v3.5.0
         with:
           arguments: build
-          gradle-version: 8.9
+          gradle-version: 8.11.1
       - name: Upload jar to CurseForge
         uses: Kir-Antipov/mc-publish@v3.3
         with:
