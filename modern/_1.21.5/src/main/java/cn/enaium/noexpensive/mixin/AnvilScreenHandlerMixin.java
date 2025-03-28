@@ -3,9 +3,8 @@ package cn.enaium.noexpensive.mixin;
 import cn.enaium.noexpensive.Config;
 import cn.enaium.noexpensive.callback.AnvilSetOutputCallback;
 import cn.enaium.noexpensive.callback.EnchantmentCanCombineCallback;
-import net.minecraft.component.type.ItemEnchantmentsComponent;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.entity.player.PlayerAbilities;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -62,8 +61,8 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
         AnvilSetOutputCallback.Companion.getEVENT().invoker().interact(o, getLevelCost(), canTakeOutput(player, false), player);
     }
 
-    @Redirect(at = @At(value = "FIELD", target = "Lnet/minecraft/entity/player/PlayerAbilities;creativeMode:Z", ordinal = 1), method = "updateResult")
-    private boolean creativeMode(PlayerAbilities instance) {
+    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;isInCreativeMode()Z", ordinal = 1), method = "updateResult")
+    private boolean creativeMode(PlayerEntity instance) {
         return true;
     }
 

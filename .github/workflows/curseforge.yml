@@ -218,10 +218,10 @@ jobs:
         with:
           name: ""
           version: ""
-          files: modern/_1.21.4/build/libs/NE-*.jar
+          files: modern/_1.21.5/build/libs/NE-*.jar
           loaders: fabric
           game-versions: |
-            1.21.4
+            1.21.5
           dependencies: |
             fabric-api
             fabric-language-kotlin

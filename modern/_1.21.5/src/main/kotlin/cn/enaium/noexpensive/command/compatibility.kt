@@ -60,18 +60,16 @@ fun compatibilityCommand(dispatcher: CommandDispatcher<ServerCommandSource>, reg
                                         val enchantment1Text =
                                             Text.literal(enchantment1Name).styled { style: Style ->
                                                 style.withHoverEvent(
-                                                    HoverEvent(
-                                                        HoverEvent.Action.SHOW_ITEM,
-                                                        HoverEvent.ItemStackContent(enchantment1ItemStack)
+                                                    HoverEvent.ShowItem(
+                                                        enchantment1ItemStack
                                                     )
                                                 ).withColor(Formatting.AQUA)
                                             }
                                         val enchantment2Text =
                                             Text.literal(enchantment2Name).styled { style: Style ->
                                                 style.withHoverEvent(
-                                                    HoverEvent(
-                                                        HoverEvent.Action.SHOW_ITEM,
-                                                        HoverEvent.ItemStackContent(enchantment2ItemStack)
+                                                    HoverEvent.ShowItem(
+                                                        enchantment2ItemStack
                                                     )
                                                 ).withColor(Formatting.AQUA)
                                             }
@@ -131,8 +129,7 @@ fun compatibilityCommand(dispatcher: CommandDispatcher<ServerCommandSource>, reg
                     for ((key, value) in compatibility) {
                         val enchantment = Text.literal(key).styled { style: Style ->
                             style.withHoverEvent(
-                                HoverEvent(
-                                    HoverEvent.Action.SHOW_TEXT,
+                                HoverEvent.ShowText(
                                     Text.translatable(Identifier.of(key).toTranslationKey("enchantment"))
                                 )
                             ).withColor(
@@ -145,8 +142,7 @@ fun compatibilityCommand(dispatcher: CommandDispatcher<ServerCommandSource>, reg
                             for (s in value) {
                                 enchantment.append(Text.literal(s).styled { style: Style ->
                                     style.withHoverEvent(
-                                        HoverEvent(
-                                            HoverEvent.Action.SHOW_TEXT,
+                                        HoverEvent.ShowText(
                                             Text.translatable(Identifier.of(s).toTranslationKey("enchantment"))
                                         )
                                     ).withColor(Formatting.AQUA)
