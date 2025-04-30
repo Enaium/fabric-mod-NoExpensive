@@ -1,0 +1,12 @@
+{
+  "command.maxLevel.success": "Nivel máximo establecido en %s",
+  "command.maxLevel.get": "El nivel máximo es %s",
+  "command.maxLevel.error": "El nivel máximo debe ser mayor o igual a 0",
+  "command.compatibility.put.success": "Se estableció que %s y %s son compatibles",
+  "command.compatibility.remove.success": "Se quitó la compatibilidad entre %s y %s",
+  "command.compatibility.notFound": "No se encontró %s",
+  "command.combineHigher.success": "Combinación de encantamientos de nivel superior establecida en %s",
+  "command.combineHigher.get": "Permitir combinar encantamientos de nivel superior: %s",
+  "command.reload.success": "Configuración recargada con éxito",
+  "command.reset.success": "Configuración restablecida con éxito"
+}
