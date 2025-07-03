@@ -3,7 +3,6 @@ package cn.enaium.noexpensive.mixin;
 import cn.enaium.noexpensive.Config;
 import cn.enaium.noexpensive.callback.AnvilSetOutputCallback;
 import cn.enaium.noexpensive.callback.EnchantmentCanCombineCallback;
-import net.minecraft.component.type.ItemEnchantmentsComponent;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.entity.player.PlayerInventory;

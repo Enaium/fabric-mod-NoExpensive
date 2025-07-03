@@ -2,14 +2,14 @@ package cn.enaium.noexpensive
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import java.io.File
 import java.io.IOException
+import kotlin.io.path.*
 
 /**
  * @author Enaium
  */
 object Config {
-    private val configFile = File(System.getProperty("user.dir"), "NoExpensive.json")
+    private val configFile = Path(System.getProperty("user.dir")).resolve("config").resolve("NoExpensive.json")
     var model = Model()
         private set
 
@@ -28,6 +28,7 @@ object Config {
 
     fun save() {
         try {
+            configFile.createParentDirectories()
             configFile.writeText(GsonBuilder().setPrettyPrinting().create().toJson(model), Charsets.UTF_8)
         } catch (e: IOException) {
             e.printStackTrace()

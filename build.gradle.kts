@@ -1,5 +1,4 @@
-import com.github.breadmoirai.githubreleaseplugin.GithubReleaseExtension
-import com.modrinth.minotaur.ModrinthExtension
+import me.modmuss50.mpp.ModPublishExtension
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -22,16 +21,14 @@ buildscript {
     }
 
     val loomVersion: String by project
-    val minotaurVersion: String by project
-    val githubReleaseVersion: String by project
     val kotlinVersion: String by project
+    val modPublishVersion: String by project
 
     dependencies {
         classpath("net.fabricmc:fabric-loom:${loomVersion}")
         classpath("net.legacyfabric:legacy-looming:${loomVersion}")
-        classpath("com.modrinth.minotaur:Minotaur:${minotaurVersion}")
-        classpath("com.github.breadmoirai:github-release:${githubReleaseVersion}")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
+        classpath("me.modmuss50.mod-publish-plugin:me.modmuss50.mod-publish-plugin.gradle.plugin:${modPublishVersion}")
     }
 }
 
@@ -45,7 +42,7 @@ sourceSets {
 
 allprojects {
     group = "cn.enaium"
-    version = "1.10.1"
+    version = rootProject.property("version").toString()
 }
 
 subprojects {
@@ -57,8 +54,7 @@ subprojects {
         plugin("java")
         plugin("org.jetbrains.kotlin.jvm")
         plugin("fabric-loom")
-        plugin("com.modrinth.minotaur")
-        plugin("com.github.breadmoirai.github-release")
+        plugin("me.modmuss50.mod-publish-plugin")
     }
 
     val archivesBaseName: String by project
@@ -126,7 +122,9 @@ subprojects {
 
     tasks.withType<KotlinCompile> {
         compilerOptions {
-            jvmTarget.set(properties["java.version"].toString().let { if (it == "8") JvmTarget.JVM_1_8 else JvmTarget.fromTarget(it) })
+            jvmTarget.set(
+                properties["java.version"].toString()
+                    .let { if (it == "8") JvmTarget.JVM_1_8 else JvmTarget.fromTarget(it) })
         }
     }
 
@@ -142,35 +140,31 @@ subprojects {
             }
         }
 
-        properties["modrinth.token"]?.let {
-            configure<ModrinthExtension> {
-                projectId.set("2nz0kJ1N")
-                versionNumber.set(version.toString())
-                versionName.set("$archivesBaseName-$version")
-                gameVersions.set(listOf(property("minecraft.version").toString()))
-                versionType.set("release")
-                loaders.set(listOf("fabric"))
-                dependencies {
-                    required.project(if (parent?.name == "legacy") "legacy-fabric-api" else "fabric-api")
-                    required.project("fabric-language-kotlin")
-                }
-                uploadFile.set(tasks.named("remapJar"))
-                changelog.set(rootProject.file("changelog.md").readText(Charsets.UTF_8))
-                token.set(it.toString())
-            }
-        }
+        configure<ModPublishExtension> {
+            file = tasks.named<AbstractArchiveTask>("remapJar").get().archiveFile.get()
+            type = STABLE
+            displayName = "NoExpensive ${project.version}"
+            changelog = rootProject.file("changelog.md").readText(Charsets.UTF_8)
+            modLoaders.add("fabric")
 
-        properties["github.token"]?.let {
-            configure<GithubReleaseExtension> {
-                token(it.toString())
-                owner.set("Enaium-FabricMC")
-                repo.set("NoExpensive")
-                tagName.set(version.toString())
-                releaseName.set("$archivesBaseName-$version")
-                targetCommitish.set("master")
-                generateReleaseNotes.set(false)
-                body.set(rootProject.file("changelog.md").readText(Charsets.UTF_8))
-                releaseAssets(listOf(tasks.named("remapJar")))
+            curseforge {
+                projectId = "387108"
+                accessToken = providers.gradleProperty("curseforge.token")
+                minecraftVersions.add(property("minecraft.version").toString())
+                requires("fabric-language-kotlin", if (parent?.name == "legacy") "legacy-fabric-api" else "fabric-api")
+            }
+
+            modrinth {
+                projectId = "2nz0kJ1N"
+                accessToken = providers.gradleProperty("modrinth.token")
+                minecraftVersions.add(property("minecraft.version").toString())
+                requires("fabric-language-kotlin", if (parent?.name == "legacy") "legacy-fabric-api" else "fabric-api")
+            }
+
+            github {
+                repository = "Enaium/fabric-mod-NoExpensive"
+                accessToken = providers.gradleProperty("github.token")
+                commitish = "master"
             }
         }
     }

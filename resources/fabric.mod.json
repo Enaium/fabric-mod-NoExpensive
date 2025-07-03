@@ -8,9 +8,9 @@
     "Enaium"
   ],
   "contact": {
-    "homepage": "https://github.com/Enaium-FabricMC/NoExpensive",
-    "sources": "https://github.com/Enaium-FabricMC/NoExpensive",
-    "issues": "https://github.com/Enaium-FabricMC/NoExpensive/issues"
+    "homepage": "https://github.com/Enaium/fabric-mod-NoExpensive",
+    "sources": "https://github.com/Enaium/fabric-mod-NoExpensive",
+    "issues": "https://github.com/Enaium/fabric-mod-NoExpensive/issues"
   },
   "license": "MIT",
   "icon": "assets/noexpensive/icon.png",
