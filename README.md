@@ -1,32 +1,72 @@
 # NoExpensive
 
-The anvil has no expensive restrictions and compatible to any enchantment.
+[English](README.md) | [中文 (Chinese)](README.zh.md)
 
-![Version](https://img.shields.io/github/v/tag/Enaium/fabric-mod-NoExpensive?label=version&style=flat-square&logo=github)
+NoExpensive is a Minecraft mod that removes the anvil's expensive restrictions and allows compatibility between any
+enchantments. It is designed to be lightweight, highly compatible, and easy to configure for both modern and legacy
+Minecraft versions.
+
+[![Version](https://img.shields.io/github/v/tag/Enaium/fabric-mod-NoExpensive?label=version&style=flat-square&logo=github)](https://github.com/Enaium/fabric-mod-NoExpensive/releases)
 [![CurseForge Downloads](https://img.shields.io/curseforge/dt/387108?style=flat-square&logo=curseforge)](https://www.curseforge.com/minecraft/mc-mods/noexpensive)
+[![Modrinth Downloads](https://img.shields.io/modrinth/dt/2nz0kJ1N?style=flat-square&logo=modrinth)](https://modrinth.com/mod/noexpensive)
+
+---
+
+## Table of Contents
+
+- [Features](#features)
+- [Installation](#installation)
+- [Commands](#commands)
+- [Configuration](#configuration)
+- [Compatibility](#compatibility)
+- [Legacy Version Notes](#legacy-version-notes)
+- [Support & Contributing](#support--contributing)
+
+---
+
+## Features
+
+- Removes the "Too Expensive!" anvil restriction
+- Allows any enchantment combinations (including normally incompatible ones)
+- Configurable maximum repair cost
+- Custom enchantment compatibility rules
+- Supports both modern and legacy Minecraft versions
+
+---
+
+## Installation
+
+1. Download the latest release
+   from [CurseForge](https://www.curseforge.com/minecraft/mc-mods/noexpensive), [Modrinth](https://modrinth.com/mod/noexpensive),
+   or [GitHub Releases](https://github.com/Enaium/fabric-mod-NoExpensive/releases).
+2. Place the mod JAR file into your Minecraft `mods` folder.
+3. Launch Minecraft with Fabric or your preferred mod loader.
+
+---
 
 ## Commands
 
-- `/noexpensive maxLevel` Get the maximum level of the repair cost.
-- `/noexpensive maxLevel <level>` Set the maximum level of the repair cost. (default: 39) If the level is set to 0, the
-  repair cost will be auto calculated.
-- `/noexpensive combineHigher` Get whether to combine the higher level enchantment.
-- `/noexpensive combineHigher <true|false>` Set whether to combine the higher level enchantment. (default: false)
-- `/noexpensive compatibility PUT <enchantment> <enchantment>` Put a compatibility between two enchantments.
-- `/noexpensive compatibility REMOVE <enchantment> <enchantment>` Remove a compatibility between two enchantments.
-- `/noexpensive compatibility list` List all compatibilities.
-- `/noexpensive reload` Reload the config.
-- `/noexpensive reset` Reset the config.
+| Command                                                         | Description                                                                     |
+|-----------------------------------------------------------------|---------------------------------------------------------------------------------|
+| `/noexpensive maxLevel`                                         | Get the current maximum repair cost level.                                      |
+| `/noexpensive maxLevel <level>`                                 | Set the maximum repair cost level (default: 39). Set to 0 for auto calculation. |
+| `/noexpensive combineHigher`                                    | Get whether combining higher-level enchantments is enabled.                     |
+| `/noexpensive combineHigher <true/false>`                       | Enable or disable combining higher-level enchantments (default: false).         |
+| `/noexpensive compatibility PUT <enchantment> <enchantment>`    | Allow two enchantments to be compatible.                                        |
+| `/noexpensive compatibility REMOVE <enchantment> <enchantment>` | Remove compatibility between two enchantments.                                  |
+| `/noexpensive compatibility list`                               | List all custom compatibilities.                                                |
+| `/noexpensive reload`                                           | Reload the configuration file.                                                  |
+| `/noexpensive reset`                                            | Reset the configuration to default.                                             |
 
-## Config
+---
 
-Location: `.minecraft/NoExpensive.json`, You can also use the command `/noexpensive reload` to reload the config, but
-you must format the config correctly.
+## Configuration
 
-Mending and Infinity are compatible by default.
-Multishot and Piercing are compatible by default.
-Sharpness, Smite and Bane of Arthropods among themselves are compatible by default.
-Protection, Projectile Protection, Blast Protection and Fire Protection among themselves are compatible by default.
+- **Location:** `.minecraft/NoExpensive.json`
+- You can reload the config in-game with `/noexpensive reload`.
+- Ensure the config file is properly formatted JSON.
+
+### Example Config
 
 ```json
 {
@@ -87,7 +127,37 @@ Protection, Projectile Protection, Blast Protection and Fire Protection among th
 }
 ```
 
-## Legacy version
+#### Default Compatibilities
 
-- The Compatibility config is number(enchantment id), not string(enchantment name), because the enchantment uses number
-  to register in 1.7.x and below.
+- **Mending** and **Infinity** are compatible by default.
+- **Multishot** and **Piercing** are compatible by default.
+- **Sharpness**, **Smite**, and **Bane of Arthropods** are mutually compatible by default.
+- **Protection**, **Projectile Protection**, **Blast Protection**, and **Fire Protection** are mutually compatible by
+  default.
+
+---
+
+## Compatibility
+
+- Supports a wide range of Minecraft versions (see folders for specific support).
+- Designed for Fabric mod loader, but may work with others if compatible.
+- For legacy versions (1.7.x and below), enchantment IDs are numbers, not strings.
+
+---
+
+## Legacy Version Notes
+
+- In 1.7.x and below, the compatibility config uses numeric enchantment IDs instead of string names due to how
+  enchantments are registered in those versions.
+
+---
+
+## Support & Contributing
+
+- For bug reports, feature requests, or questions, please open
+  an [issue](https://github.com/Enaium/fabric-mod-NoExpensive/issues).
+- Contributions are welcome! Feel free to submit pull requests.
+
+---
+
+Enjoy a restriction-free anvil experience!
