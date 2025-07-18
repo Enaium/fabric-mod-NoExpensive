@@ -1,4 +1,6 @@
 import me.modmuss50.mpp.ModPublishExtension
+import me.modmuss50.mpp.PublishModTask
+import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -165,6 +167,10 @@ subprojects {
                 repository = "Enaium/fabric-mod-NoExpensive"
                 accessToken = providers.gradleProperty("github.token")
                 commitish = "master"
+            }
+
+            tasks.withType<PublishModTask>().configureEach {
+                dependsOn(tasks.named("remapJar"))
             }
         }
     }
