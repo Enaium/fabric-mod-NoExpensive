@@ -13,8 +13,8 @@ include("legacy:_1.7.10")
 findProject(":legacy:_1.7.10")?.name = "_1.7.10"
 
 include("modern")
-include("modern:_1.21.10")
-findProject(":modern:_1.21.10")?.name = "_1.21.10"
+include("modern:_1.21.11")
+findProject(":modern:_1.21.11")?.name = "_1.21.11"
 include("modern:_1.20.6")
 findProject(":modern:_1.20.6")?.name = "_1.20.6"
 include("modern:_1.19.4")

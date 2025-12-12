@@ -8,6 +8,8 @@ import cn.enaium.noexpensive.command.*
 import com.mojang.brigadier.CommandDispatcher
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback
 import net.minecraft.command.CommandRegistryAccess
+import net.minecraft.command.permission.Permission
+import net.minecraft.command.permission.PermissionLevel
 import net.minecraft.server.command.CommandManager
 import net.minecraft.server.command.ServerCommandSource
 
@@ -47,4 +49,4 @@ object Server {
 }
 
 val ROOT = CommandManager.literal("noexpensive")
-    .requires { source: ServerCommandSource -> source.hasPermissionLevel(4) }
+    .requires { source: ServerCommandSource -> source.permissions.hasPermission(Permission.Level(PermissionLevel.OWNERS)) }
