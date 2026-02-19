@@ -1,0 +1,3 @@
+tasks.runClient {
+    args("--userProperties", "{}")
+}

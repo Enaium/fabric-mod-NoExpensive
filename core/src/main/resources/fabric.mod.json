@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "id": "noexpensive",
+  "version": "@version@",
+  "name": "NoExpensive",
+  "description": "The anvil has no expensive restrictions!",
+  "authors": [
+    "Enaium"
+  ],
+  "contact": {
+    "homepage": "https://github.com/Enaium/fabric-mod-NoExpensive",
+    "sources": "https://github.com/Enaium/fabric-mod-NoExpensive",
+    "issues": "https://github.com/Enaium/fabric-mod-NoExpensive/issues"
+  },
+  "license": "MIT",
+  "icon": "assets/noexpensive/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "cn.enaium.noexpensive.NoExpensive::initializer",
+      "cn.enaium.noexpensive.NoExpensiveKt::initializer",
+      "cn.enaium.noexpensive.Commands::initializer"
+    ],
+    "client": [
+      "cn.enaium.noexpensive.NoExpensive::client"
+    ],
+    "server": [
+      "cn.enaium.noexpensive.NoExpensive::server"
+    ]
+  },
+  "mixins": [
+    "noexpensive.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": "*",
+    "minecraft": "@minecraft_version@",
+    "java": ">=@java_version@",
+    "fabric-language-kotlin": "*"
+  },
+  "suggests": {
+    "flamingo": "*"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "cn.enaium.noexpensive.mixin",
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
