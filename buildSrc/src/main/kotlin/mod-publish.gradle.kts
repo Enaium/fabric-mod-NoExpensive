@@ -1,4 +1,5 @@
 import me.modmuss50.mpp.PublishModTask
+import org.gradle.util.internal.VersionNumber
 
 plugins {
     id("me.modmuss50.mod-publish-plugin")
@@ -6,7 +7,10 @@ plugins {
 
 afterEvaluate {
     publishMods {
-        file = tasks.named<AbstractArchiveTask>("remapJar").get().archiveFile.get()
+        val disableObfuscation = properties.getOrDefault("fabric.loom.disableObfuscation", false).toString().toBoolean()
+        val minecraftVersion = properties["minecraft.version"].toString()
+        val modern = VersionNumber.parse(minecraftVersion) >= VersionNumber.parse("1.14")
+        file = tasks.named<AbstractArchiveTask>(if (disableObfuscation) "jar" else "remapJar").get().archiveFile.get()
         type = STABLE
         displayName = "NoExpensive ${project.version}"
         changelog = rootProject.file("changelog.md").readText(Charsets.UTF_8)
@@ -16,14 +20,14 @@ afterEvaluate {
             projectId = "387108"
             accessToken = providers.gradleProperty("curseforge.token")
             minecraftVersions.add(property("minecraft.version").toString())
-            requires("fabric-language-kotlin", if (parent?.name == "legacy") "legacy-fabric-api" else "fabric-api")
+            requires("fabric-language-kotlin", if (modern) "fabric-api" else "legacy-fabric-api")
         }
 
         modrinth {
             projectId = "2nz0kJ1N"
             accessToken = providers.gradleProperty("modrinth.token")
             minecraftVersions.add(property("minecraft.version").toString())
-            requires("fabric-language-kotlin", if (parent?.name == "legacy") "legacy-fabric-api" else "fabric-api")
+            requires("fabric-language-kotlin", if (modern) "fabric-api" else "legacy-fabric-api")
         }
 
         github {
@@ -33,7 +37,7 @@ afterEvaluate {
         }
 
         tasks.withType<PublishModTask>().configureEach {
-            dependsOn(tasks.named("remapJar"))
+            dependsOn(tasks.named(if (disableObfuscation) "jar" else "remapJar"))
         }
     }
 }

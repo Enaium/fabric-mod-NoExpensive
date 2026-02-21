@@ -2,7 +2,7 @@
 kotlin = "2.3.10"
 fabricKotlin = "1.13.9+kotlin.2.3.10"
 publish = "0.8.4"
-fmg = "0.0.1"
+fmg = "0.0.3"
 loom = "1.15-SNAPSHOT"
 gson = "2.2.4"
 
