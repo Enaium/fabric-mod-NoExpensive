@@ -34,7 +34,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
  */
 @Mixin(AnvilScreen.class)
 public class AnvilScreenMixin {
-    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;hasInfiniteMaterials()Z"), method = "renderLabels")
+    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;hasInfiniteMaterials()Z"), method = "extractLabels")
     private boolean creativeMode(LocalPlayer instance) {
         return true;
     }
