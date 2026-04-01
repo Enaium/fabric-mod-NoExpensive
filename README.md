@@ -44,90 +44,19 @@ Minecraft versions.
 
 ---
 
-## Commands
-
-| Command                                                         | Description                                                                     |
-|-----------------------------------------------------------------|---------------------------------------------------------------------------------|
-| `/noexpensive maxLevel`                                         | Get the current maximum repair cost level.                                      |
-| `/noexpensive maxLevel <level>`                                 | Set the maximum repair cost level (default: 39). Set to 0 for auto calculation. |
-| `/noexpensive combineHigher`                                    | Get whether combining higher-level enchantments is enabled.                     |
-| `/noexpensive combineHigher <true/false>`                       | Enable or disable combining higher-level enchantments (default: false).         |
-| `/noexpensive compatibility PUT <enchantment> <enchantment>`    | Allow two enchantments to be compatible.                                        |
-| `/noexpensive compatibility REMOVE <enchantment> <enchantment>` | Remove compatibility between two enchantments.                                  |
-| `/noexpensive compatibility list`                               | List all custom compatibilities.                                                |
-| `/noexpensive reload`                                           | Reload the configuration file.                                                  |
-| `/noexpensive reset`                                            | Reset the configuration to default.                                             |
-
----
-
 ## Configuration
 
-- **Location:** `.minecraft/NoExpensive.json`
-- You can reload the config in-game with `/noexpensive reload`.
-- Ensure the config file is properly formatted JSON.
+This mod uses the MineConf for configuration.
 
-### Example Config
+### Commands
 
-```json
-{
-  "maxLevel": 39,
-  "combineHigher": false,
-  "compatibility": {
-    "minecraft:mending": [
-      "minecraft:infinity"
-    ],
-    "minecraft:multishot": [
-      "minecraft:piercing"
-    ],
-    "minecraft:sharpness": [
-      "minecraft:smite",
-      "minecraft:bane_of_arthropods"
-    ],
-    "minecraft:smite": [
-      "minecraft:bane_of_arthropods",
-      "minecraft:sharpness"
-    ],
-    "minecraft:bane_of_arthropods": [
-      "minecraft:sharpness",
-      "minecraft:smite"
-    ],
-    "minecraft:density": [
-      "minecraft:breach",
-      "minecraft:sharpness",
-      "minecraft:smite",
-      "minecraft:bane_of_arthropods"
-    ],
-    "minecraft:breach": [
-      "minecraft:density",
-      "minecraft:sharpness",
-      "minecraft:smite",
-      "minecraft:bane_of_arthropods"
-    ],
-    "minecraft:protection": [
-      "minecraft:projectile_protection",
-      "minecraft:blast_protection",
-      "minecraft:fire_protection"
-    ],
-    "minecraft:projectile_protection": [
-      "minecraft:blast_protection",
-      "minecraft:fire_protection",
-      "minecraft:protection"
-    ],
-    "minecraft:blast_protection": [
-      "minecraft:fire_protection",
-      "minecraft:protection",
-      "minecraft:projectile_protection"
-    ],
-    "minecraft:fire_protection": [
-      "minecraft:protection",
-      "minecraft:projectile_protection",
-      "minecraft:blast_protection"
-    ]
-  }
-}
-```
+| Config         | Description                                                                 |
+|----------------|-----------------------------------------------------------------------------|
+| max_level      | The maximum repair cost level (default: 39). Set to 0 for auto calculation. |
+| combine_higher | Enable or disable combining higher-level enchantments (default: false).     |
+| compatibility  | Allow two enchantments to be compatible.                                    |
 
-#### Default Compatibilities
+### Default Compatibilities
 
 - **Mending** and **Infinity** are compatible by default.
 - **Multishot** and **Piercing** are compatible by default.

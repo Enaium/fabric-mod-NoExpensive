@@ -45,90 +45,19 @@ Minecraft。
 
 ---
 
-## 指令说明
+## 配置
 
-| 指令                                            | 说明                         |
-|-----------------------------------------------|----------------------------|
-| `/noexpensive maxLevel`                       | 获取当前最大修复消耗等级。              |
-| `/noexpensive maxLevel <level>`               | 设置最大修复消耗等级（默认 39，0 为自动计算）。 |
-| `/noexpensive combineHigher`                  | 查询是否允许合成更高等级附魔。            |
-| `/noexpensive combineHigher <true/false>`     | 设置是否允许合成更高等级附魔（默认 false）。  |
-| `/noexpensive compatibility PUT <附魔> <附魔>`    | 允许两个附魔兼容。                  |
-| `/noexpensive compatibility REMOVE <附魔> <附魔>` | 移除两个附魔的兼容性。                |
-| `/noexpensive compatibility list`             | 列出所有自定义兼容性。                |
-| `/noexpensive reload`                         | 重新加载配置文件。                  |
-| `/noexpensive reset`                          | 重置配置为默认值。                  |
+模组使用MineConf进行配置.
 
----
+### 配置项
 
-## 配置文件
+| 配置             | 说明                       |
+|----------------|--------------------------|
+| max_level      | 最大修复消耗等级（默认 39，0 为自动计算）。 |
+| combine_higher | 是否允许合成更高等级附魔（默认 false）。  |
+| compatibility  | 允许两个附魔兼容。                |
 
-- **位置：** `.minecraft/NoExpensive.json`
-- 可通过 `/noexpensive reload` 指令在游戏内重新加载配置。
-- 请确保配置文件为合法 JSON 格式。
-
-### 配置示例
-
-```json
-{
-  "maxLevel": 39,
-  "combineHigher": false,
-  "compatibility": {
-    "minecraft:mending": [
-      "minecraft:infinity"
-    ],
-    "minecraft:multishot": [
-      "minecraft:piercing"
-    ],
-    "minecraft:sharpness": [
-      "minecraft:smite",
-      "minecraft:bane_of_arthropods"
-    ],
-    "minecraft:smite": [
-      "minecraft:bane_of_arthropods",
-      "minecraft:sharpness"
-    ],
-    "minecraft:bane_of_arthropods": [
-      "minecraft:sharpness",
-      "minecraft:smite"
-    ],
-    "minecraft:density": [
-      "minecraft:breach",
-      "minecraft:sharpness",
-      "minecraft:smite",
-      "minecraft:bane_of_arthropods"
-    ],
-    "minecraft:breach": [
-      "minecraft:density",
-      "minecraft:sharpness",
-      "minecraft:smite",
-      "minecraft:bane_of_arthropods"
-    ],
-    "minecraft:protection": [
-      "minecraft:projectile_protection",
-      "minecraft:blast_protection",
-      "minecraft:fire_protection"
-    ],
-    "minecraft:projectile_protection": [
-      "minecraft:blast_protection",
-      "minecraft:fire_protection",
-      "minecraft:protection"
-    ],
-    "minecraft:blast_protection": [
-      "minecraft:fire_protection",
-      "minecraft:protection",
-      "minecraft:projectile_protection"
-    ],
-    "minecraft:fire_protection": [
-      "minecraft:protection",
-      "minecraft:projectile_protection",
-      "minecraft:blast_protection"
-    ]
-  }
-}
-```
-
-#### 默认兼容性
+### 默认兼容性
 
 - **经验修补（Mending）** 与 **无限（Infinity）** 默认兼容。
 - **多重射击（Multishot）** 与 **穿透（Piercing）** 默认兼容。
