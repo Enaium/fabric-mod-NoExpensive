@@ -3,8 +3,8 @@ plugins {
 }
 
 dependencies {
+    compileOnly(libs.mineconf)
     implementation(libs.fabric.kotlin)
-    implementation(libs.gson)
 }
 
 kotlin {

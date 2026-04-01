@@ -22,12 +22,10 @@
 
 package cn.enaium.noexpensive
 
-import cn.enaium.noexpensive.command.*
-import com.mojang.brigadier.CommandDispatcher
+import cn.enaium.noexpensive.config.NoExpensiveConfig
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback
-import net.minecraft.commands.CommandBuildContext
-import net.minecraft.commands.CommandSourceStack
-import net.minecraft.commands.Commands
+import net.minecraft.core.registries.Registries
+import kotlin.jvm.optionals.getOrNull
 
 /**
  * @author Enaium
@@ -35,13 +33,11 @@ import net.minecraft.commands.Commands
 object Commands {
     @JvmStatic
     fun initializer() {
-        CommandRegistrationCallback.EVENT.register(CommandRegistrationCallback { dispatcher: CommandDispatcher<CommandSourceStack>, buildContext: CommandBuildContext, selection: Commands.CommandSelection ->
-            maxLevelCommand(dispatcher)
-            action(dispatcher, buildContext)
-            list(dispatcher)
-            combineHigherCommand(dispatcher)
-            reloadCommand(dispatcher)
-            reset(dispatcher)
+        CommandRegistrationCallback.EVENT.register(CommandRegistrationCallback { _, buildContext, _ ->
+            val map = buildContext.lookup(Registries.ENCHANTMENT)
+                .map { it -> it.listElementIds().map { it.identifier().toString() } }.getOrNull()?.toList()
+                ?: emptyList()
+            NoExpensiveConfig.compatibility = NoExpensiveConfig.compatibility.copy(keyOptions = map, valueOptions = map)
         })
     }
 }

@@ -22,10 +22,11 @@
 
 package cn.enaium.noexpensive
 
-import cn.enaium.noexpensive.command.*
+import cn.enaium.noexpensive.config.NoExpensiveConfig
 import com.mojang.brigadier.CommandDispatcher
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback
 import net.minecraft.server.command.ServerCommandSource
+import net.minecraft.util.registry.Registry
 
 /**
  * @author Enaium
@@ -33,13 +34,9 @@ import net.minecraft.server.command.ServerCommandSource
 object Commands {
     @JvmStatic
     fun initializer() {
-        CommandRegistrationCallback.EVENT.register(CommandRegistrationCallback { dispatcher: CommandDispatcher<ServerCommandSource>, _: Boolean ->
-            maxLevelCommand(dispatcher)
-            action(dispatcher)
-            list(dispatcher)
-            combineHigherCommand(dispatcher)
-            reloadCommand(dispatcher)
-            reset(dispatcher)
+        CommandRegistrationCallback.EVENT.register(CommandRegistrationCallback { _: CommandDispatcher<ServerCommandSource>, _: Boolean ->
+            val map = Registry.ENCHANTMENT.ids.map { it.toString() }.toList()
+            NoExpensiveConfig.compatibility = NoExpensiveConfig.compatibility.copy(keyOptions = map, valueOptions = map)
         })
     }
 }
