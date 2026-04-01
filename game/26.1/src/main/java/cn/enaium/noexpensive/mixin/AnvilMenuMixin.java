@@ -22,7 +22,7 @@
 
 package cn.enaium.noexpensive.mixin;
 
-import cn.enaium.noexpensive.Config;
+import cn.enaium.noexpensive.config.NoExpensiveConfig;
 import cn.enaium.noexpensive.event.ScreenCallbacks;
 import net.minecraft.core.Holder;
 import net.minecraft.world.entity.player.Inventory;
@@ -55,24 +55,24 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenu {
 
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/inventory/DataSlot;get()I"), method = "mayPickup")
     private int mayPickup(DataSlot instance) {
-        if (Config.INSTANCE.getModel().getMaxLevel() > 0) {
-            return Math.min(Math.abs(instance.get()), Config.INSTANCE.getModel().getMaxLevel());
+        if (NoExpensiveConfig.INSTANCE.getMaxLevel().getValue() > 0) {
+            return Math.min(Math.abs(instance.get()), NoExpensiveConfig.INSTANCE.getMaxLevel().getValue());
         }
         return Math.abs(instance.get());
     }
 
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/inventory/DataSlot;get()I"), method = "onTake")
     private int onTake(DataSlot instance) {
-        if (Config.INSTANCE.getModel().getMaxLevel() > 0) {
-            return Math.min(Math.abs(instance.get()), Config.INSTANCE.getModel().getMaxLevel());
+        if (NoExpensiveConfig.INSTANCE.getMaxLevel().getValue() > 0) {
+            return Math.min(Math.abs(instance.get()), NoExpensiveConfig.INSTANCE.getMaxLevel().getValue());
         }
         return Math.abs(instance.get());
     }
 
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/inventory/DataSlot;get()I"), method = "createResult")
     private int get(DataSlot instance) {
-        if (Config.INSTANCE.getModel().getMaxLevel() > 0) {
-            return Math.min(Math.abs(instance.get()), Config.INSTANCE.getModel().getMaxLevel());
+        if (NoExpensiveConfig.INSTANCE.getMaxLevel().getValue() > 0) {
+            return Math.min(Math.abs(instance.get()), NoExpensiveConfig.INSTANCE.getMaxLevel().getValue());
         }
         return Math.abs(instance.get());
     }
@@ -92,8 +92,8 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenu {
 
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/inventory/DataSlot;get()I"), method = "getCost")
     private int getCost(DataSlot instance) {
-        if (Config.INSTANCE.getModel().getMaxLevel() > 0) {
-            return Math.min(Math.abs(instance.get()), Config.INSTANCE.getModel().getMaxLevel());
+        if (NoExpensiveConfig.INSTANCE.getMaxLevel().getValue() > 0) {
+            return Math.min(Math.abs(instance.get()), NoExpensiveConfig.INSTANCE.getMaxLevel().getValue());
         }
         return Math.abs(instance.get());
     }
@@ -109,6 +109,6 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenu {
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/enchantment/Enchantment;getMaxLevel()I"), method = "createResult")
     public int getMaxLevel(Enchantment instance) {
         //though it's the type of the max level is short, but it will be cast to byte when it's used
-        return Config.INSTANCE.getModel().getCombineHigher() ? 255 : instance.getMaxLevel();
+        return NoExpensiveConfig.INSTANCE.getCombineHigher().getValue() ? 255 : instance.getMaxLevel();
     }
 }

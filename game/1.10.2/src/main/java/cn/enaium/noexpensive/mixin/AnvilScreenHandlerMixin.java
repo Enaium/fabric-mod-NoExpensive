@@ -1,6 +1,6 @@
 package cn.enaium.noexpensive.mixin;
 
-import cn.enaium.noexpensive.Config;
+import cn.enaium.noexpensive.config.NoExpensiveConfig;
 import cn.enaium.noexpensive.event.ScreenCallbacks;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.PlayerAbilities;
@@ -40,8 +40,8 @@ public abstract class AnvilScreenHandlerMixin extends ScreenHandler {
 
     @Redirect(at = @At(value = "FIELD", target = "Lnet/minecraft/screen/AnvilScreenHandler;repairCost:I", opcode = Opcodes.GETFIELD), method = "updateResult")
     private int repairCost(AnvilScreenHandler instance) {
-        if (Config.INSTANCE.getModel().getMaxLevel() > 0) {
-            return Math.min(Math.abs(instance.repairCost), Config.INSTANCE.getModel().getMaxLevel());
+        if (NoExpensiveConfig.INSTANCE.getMaxLevel().getValue() > 0) {
+            return Math.min(Math.abs(instance.repairCost), NoExpensiveConfig.INSTANCE.getMaxLevel().getValue());
         }
         return Math.abs(instance.repairCost);
     }
@@ -50,7 +50,7 @@ public abstract class AnvilScreenHandlerMixin extends ScreenHandler {
     public void setStack(CallbackInfo ci) {
         ItemStack o = resultInventory.getInvStack(0);
         if (o != null) {
-            ScreenCallbacks.AnvilSetOutputCallback.Companion.getEVENT().getInvoker().set(toCommon(player), Config.INSTANCE.getModel().getMaxLevel() > 0 ? Math.min(Math.abs(repairCost), Config.INSTANCE.getModel().getMaxLevel()) : (repairCost), slots.get(2).canTakeItems(player));
+            ScreenCallbacks.AnvilSetOutputCallback.Companion.getEVENT().getInvoker().set(toCommon(player), NoExpensiveConfig.INSTANCE.getMaxLevel().getValue() > 0 ? Math.min(Math.abs(repairCost), NoExpensiveConfig.INSTANCE.getMaxLevel().getValue()) : (repairCost), slots.get(2).canTakeItems(player));
         }
     }
 
@@ -73,6 +73,6 @@ public abstract class AnvilScreenHandlerMixin extends ScreenHandler {
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/enchantment/Enchantment;getMaximumLevel()I"), method = "updateResult")
     public int getMaxLevel(Enchantment instance) {
         //though it's the type of the max level is short, but it will be cast to byte when it's used
-        return Config.INSTANCE.getModel().getCombineHigher() ? 255 : instance.getMaximumLevel();
+        return NoExpensiveConfig.INSTANCE.getCombineHigher().getValue() ? 255 : instance.getMaximumLevel();
     }
 }

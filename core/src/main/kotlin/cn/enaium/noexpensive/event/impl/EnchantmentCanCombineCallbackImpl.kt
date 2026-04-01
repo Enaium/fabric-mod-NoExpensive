@@ -22,7 +22,7 @@
 
 package cn.enaium.noexpensive.event.impl
 
-import cn.enaium.noexpensive.Config.model
+import cn.enaium.noexpensive.config.NoExpensiveConfig
 import cn.enaium.noexpensive.event.ScreenCallbacks
 
 /**
@@ -30,7 +30,7 @@ import cn.enaium.noexpensive.event.ScreenCallbacks
  */
 class EnchantmentCanCombineCallbackImpl : ScreenCallbacks.EnchantmentCanCombineCallback {
     override fun canCombine(enchantment: String, other: String): Boolean {
-        val compatibility: Map<String, List<String>> = model.compatibility
+        val compatibility = NoExpensiveConfig.compatibility.value
         if (compatibility.containsKey(enchantment) && compatibility[enchantment]!!.contains(other)) {
             return true
         } else if (compatibility.containsKey(other) && compatibility[other]!!.contains(

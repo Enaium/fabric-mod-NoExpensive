@@ -23,8 +23,9 @@
 package cn.enaium.noexpensive
 
 import cn.enaium.noexpensive.event.ScreenCallbacks
-import cn.enaium.noexpensive.event.ServerCommandCallbacks
-import cn.enaium.noexpensive.event.impl.*
+import cn.enaium.noexpensive.event.impl.AnvilSetOutputCallbackClientImpl
+import cn.enaium.noexpensive.event.impl.AnvilSetOutputCallbackServerImpl
+import cn.enaium.noexpensive.event.impl.EnchantmentCanCombineCallbackImpl
 
 /**
  * @author Enaium
@@ -34,13 +35,6 @@ object NoExpensive {
     fun initializer() {
         println("Hello NoExpensive world!")
         ScreenCallbacks.EnchantmentCanCombineCallback.EVENT.register(EnchantmentCanCombineCallbackImpl())
-        ServerCommandCallbacks.CombineHigherCallback.EVENT.register(CombineHigherCallbackImpl())
-        ServerCommandCallbacks.ActionCallback.EVENT.register(ActionCallbackImpl())
-        ServerCommandCallbacks.MaxLevelCallback.EVENT.register(MaxLevelCallbackImpl())
-        ServerCommandCallbacks.ReloadCallback.EVENT.register(ReloadCallbackImpl())
-        ServerCommandCallbacks.ResetCallback.EVENT.register(ResetCallbackImpl())
-        Config.load()
-        Runtime.getRuntime().addShutdownHook(Thread(Config::save))
     }
 
     @JvmStatic

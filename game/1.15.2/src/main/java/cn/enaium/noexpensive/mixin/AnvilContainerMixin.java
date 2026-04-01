@@ -1,6 +1,6 @@
 package cn.enaium.noexpensive.mixin;
 
-import cn.enaium.noexpensive.Config;
+import cn.enaium.noexpensive.config.NoExpensiveConfig;
 import cn.enaium.noexpensive.event.ScreenCallbacks;
 import net.minecraft.container.AnvilContainer;
 import net.minecraft.container.Container;
@@ -48,8 +48,8 @@ public abstract class AnvilContainerMixin extends Container {
 
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/container/Property;get()I"), method = "updateResult")
     private int get(Property property) {
-        if (Config.INSTANCE.getModel().getMaxLevel() > 0) {
-            return Math.min(Math.abs(property.get()), Config.INSTANCE.getModel().getMaxLevel());
+        if (NoExpensiveConfig.INSTANCE.getMaxLevel().getValue() > 0) {
+            return Math.min(Math.abs(property.get()), NoExpensiveConfig.INSTANCE.getMaxLevel().getValue());
         }
         return Math.abs(property.get());
     }
@@ -69,8 +69,8 @@ public abstract class AnvilContainerMixin extends Container {
 
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/container/Property;get()I"), method = "getLevelCost")
     private int getLevelCost(Property property) {
-        if (Config.INSTANCE.getModel().getMaxLevel() > 0) {
-            return Math.min(Math.abs(property.get()), Config.INSTANCE.getModel().getMaxLevel());
+        if (NoExpensiveConfig.INSTANCE.getMaxLevel().getValue() > 0) {
+            return Math.min(Math.abs(property.get()), NoExpensiveConfig.INSTANCE.getMaxLevel().getValue());
         }
         return Math.abs(property.get());
     }
@@ -90,6 +90,6 @@ public abstract class AnvilContainerMixin extends Container {
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/enchantment/Enchantment;getMaximumLevel()I"), method = "updateResult")
     public int getMaxLevel(Enchantment instance) {
         //though it's the type of the max level is short, but it will be cast to byte when it's used
-        return Config.INSTANCE.getModel().getCombineHigher() ? 255 : instance.getMaximumLevel();
+        return NoExpensiveConfig.INSTANCE.getCombineHigher().getValue() ? 255 : instance.getMaximumLevel();
     }
 }

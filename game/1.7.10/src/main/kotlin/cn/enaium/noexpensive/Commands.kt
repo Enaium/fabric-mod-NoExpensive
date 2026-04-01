@@ -22,8 +22,8 @@
 
 package cn.enaium.noexpensive
 
-import cn.enaium.noexpensive.command.NoExpensiveCommand
-import net.legacyfabric.fabric.api.registry.CommandRegistry
+import cn.enaium.noexpensive.config.NoExpensiveConfig
+import net.minecraft.enchantment.Enchantment
 
 /**
  * @author Enaium
@@ -31,6 +31,7 @@ import net.legacyfabric.fabric.api.registry.CommandRegistry
 object Commands {
     @JvmStatic
     fun initializer() {
-        CommandRegistry.INSTANCE.register(NoExpensiveCommand())
+        val map = Enchantment.ALL_ENCHANTMENTS.filterNotNull().map { it.id.toString() }
+        NoExpensiveConfig.compatibility = NoExpensiveConfig.compatibility.copy(keyOptions = map, valueOptions = map)
     }
 }

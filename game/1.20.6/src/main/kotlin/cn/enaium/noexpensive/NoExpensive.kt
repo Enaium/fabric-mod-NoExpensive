@@ -22,7 +22,7 @@
 
 package cn.enaium.noexpensive
 
-import cn.enaium.noexpensive.Config.model
+import cn.enaium.noexpensive.config.NoExpensiveConfig
 import net.minecraft.server.command.CommandManager
 import net.minecraft.server.command.ServerCommandSource
 
@@ -30,36 +30,47 @@ import net.minecraft.server.command.ServerCommandSource
  * @author Enaium
  */
 fun initializer() {
-    if (model.compatibility.isEmpty()) {
-        model.compatibility = mutableMapOf(
-            "minecraft:mending" to mutableListOf("minecraft:infinity"),
-            "minecraft:multishot" to mutableListOf("minecraft:piercing"),
-            "minecraft:sharpness" to mutableListOf("minecraft:smite", "minecraft:bane_of_arthropods"),
-            "minecraft:smite" to mutableListOf("minecraft:bane_of_arthropods", "minecraft:sharpness"),
-            "minecraft:bane_of_arthropods" to mutableListOf("minecraft:sharpness", "minecraft:smite"),
-            "minecraft:protection" to mutableListOf(
-                "minecraft:projectile_protection",
-                "minecraft:blast_protection",
-                "minecraft:fire_protection"
-            ),
-            "minecraft:projectile_protection" to mutableListOf(
-                "minecraft:blast_protection",
-                "minecraft:fire_protection",
-                "minecraft:protection"
-            ),
-            "minecraft:blast_protection" to mutableListOf(
-                "minecraft:fire_protection",
-                "minecraft:protection",
-                "minecraft:projectile_protection"
-            ),
-            "minecraft:fire_protection" to mutableListOf(
-                "minecraft:protection",
-                "minecraft:projectile_protection",
-                "minecraft:blast_protection"
+    if (NoExpensiveConfig.compatibility.value.isEmpty()) {
+        NoExpensiveConfig.compatibility = NoExpensiveConfig.compatibility.copy(
+            defaultValue = mutableMapOf(
+                "minecraft:mending" to mutableListOf("minecraft:infinity"),
+                "minecraft:multishot" to mutableListOf("minecraft:piercing"),
+                "minecraft:sharpness" to mutableListOf("minecraft:smite", "minecraft:bane_of_arthropods"),
+                "minecraft:smite" to mutableListOf("minecraft:bane_of_arthropods", "minecraft:sharpness"),
+                "minecraft:bane_of_arthropods" to mutableListOf("minecraft:sharpness", "minecraft:smite"),
+                "minecraft:density" to mutableListOf(
+                    "minecraft:breach",
+                    "minecraft:sharpness",
+                    "minecraft:smite",
+                    "minecraft:bane_of_arthropods"
+                ),
+                "minecraft:breach" to mutableListOf(
+                    "minecraft:density",
+                    "minecraft:sharpness",
+                    "minecraft:smite",
+                    "minecraft:bane_of_arthropods"
+                ),
+                "minecraft:protection" to mutableListOf(
+                    "minecraft:projectile_protection",
+                    "minecraft:blast_protection",
+                    "minecraft:fire_protection"
+                ),
+                "minecraft:projectile_protection" to mutableListOf(
+                    "minecraft:blast_protection",
+                    "minecraft:fire_protection",
+                    "minecraft:protection"
+                ),
+                "minecraft:blast_protection" to mutableListOf(
+                    "minecraft:fire_protection",
+                    "minecraft:protection",
+                    "minecraft:projectile_protection"
+                ),
+                "minecraft:fire_protection" to mutableListOf(
+                    "minecraft:protection",
+                    "minecraft:projectile_protection",
+                    "minecraft:blast_protection"
+                )
             )
         )
     }
 }
-
-val ROOT = CommandManager.literal("noexpensive")
-    .requires { source: ServerCommandSource -> source.hasPermissionLevel(4) }
